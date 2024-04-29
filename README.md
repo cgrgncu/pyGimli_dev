@@ -1,4 +1,8 @@
 # pyGimli_dev
+### 來源:
++ 官網: https://www.pygimli.org/
++ Github: https://github.com/gimli-org/gimli
+
 
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
@@ -11,10 +15,17 @@
   ```
   conda create -n pg -c gimli -c conda-forge "pygimli>=1.5.0"
   ```
+> 實際環境的檔案位置:「C:\Users\USER\miniconda3\envs」
 
++ 啟用環境
   ```
   conda activate pg
   ```
-  + 說明:
-    + 實際檔案位置:「C:\Users\USER\miniconda3\envs」
-    + 
+
++ 安裝auto-py-to-exe
+  ```
+  conda activate pg  
+  ```
+  ```
+  pip install auto-py-to-exe  
+  ```  
