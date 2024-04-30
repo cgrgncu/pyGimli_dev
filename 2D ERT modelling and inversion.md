@@ -11,8 +11,13 @@ conda activate pg
 cd C:\Users\USER\Desktop\pyGIMLi_1.5.0_Script
 ```
 
+```
+python.exe ERT_01.py
+```
 
 
+
+### 引用
 
 
 ```
