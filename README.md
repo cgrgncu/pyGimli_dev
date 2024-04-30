@@ -1,7 +1,16 @@
 # pyGimli_dev
++ pyGIMLi整合開發紀錄
++ 最後更新: HsiupoYeh 20240430a
++ pyGIMLi is an open-source library for multi-method modelling and inversion in geophysics.
+```
+Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library for modelling and inversion in geophysics, Computers and Geosciences, 109, 106-123, doi: 10.1016/j.cageo.2017.07.011.
+```
+
 ### 來源:
 + 官網: https://www.pygimli.org/
 + Github: https://github.com/gimli-org/gimli
++ 授權: Apache 2.0
+  + 可商用，但要註明保留原作者權利。
 
 
 ### 安裝miniconda(在Windows 10)
