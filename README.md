@@ -11,7 +11,7 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
 + Github: https://github.com/gimli-org/gimli
 + 授權: Apache 2.0
   + 可商用，但要註明保留原作者權利。
-
++ Python版本限制: 使用3.7以後的穩定版本。但其他相依套件可能有不同版本需求。
 
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
