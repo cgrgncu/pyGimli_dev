@@ -1,5 +1,20 @@
 # 2D ERT modelling and inversion
 
+
+
+### 進入並啟用環境
+```
+conda activate pg  
+```
+
+```
+cd C:\Users\USER\Desktop\pyGIMLi_1.5.0_Script
+```
+
+
+
+
+
 ```
 import matplotlib.pyplot as plt
 import numpy as np
