@@ -4,8 +4,13 @@
 + 目前針對.ohm檔案。使用最少量的資訊，包含a b m n r，以及有地形的電極位置。
 + 參考: https://github.com/gimli-org/transform2022/blob/main/2_Lake.ipynb
   + 這裡有提供範例檔案及示範如何載入資料。
+  ```python
+  # 預設呼叫方法
+  data = ert.load("data/lake.ohm")
+  # 等價於以下寫法
+  data = pg.physics.ert.load("my_ert_data.dat", verbose=False, ensureKRhoa=False)
   ```
-  ```
++ 這個ert.load事實上是寫在importData.py中，會呼叫
 + 可以用ert.show(data, vals='rhoa', logScale=True, circular=True) 來繪圖
   + 可是circular效果不是很好，最好別用
   ```python
