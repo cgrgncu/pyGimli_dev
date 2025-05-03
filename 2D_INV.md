@@ -26,16 +26,16 @@
   # 等價於以下寫法
   ax, cbar = ert.show(
       data,                        # 必須的參數：DataContainerERT 物件
-      vals='rhoa',                 # 預設值：要繪製的數據欄位名稱，這裡是 'rhoa'（電阻率）
-      x='a',                       # 預設值：x 軸對應的電極，這裡是 'a'（源電極）
-      y='m',                       # 預設值：y 軸對應的電極，這裡是 'm'（測量電極）
-      style='ab-mn',               # 預設值：樣式，這裡選擇 'ab-mn'，意思是使用源電極和測量電極的各種組合
+      vals='rhoa',                 # 預設值：要繪製的數據欄位名稱，預設是 'rhoa'（電阻率）
+      x=None,                      # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
+      y=None,                      # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
+      style=None,                  # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
       logScale=True,               # 預設值：根據數據值來決定是否使用對數尺度，這裡默認使用對數尺度
       cMap=None,                   # 預設值：顏色映射（使用 'rhoa' 的預設顏色映射）
       label=None,                  # 預設值：數據欄位的標籤，默認使用欄位的單位
       switchxy=False,              # 預設值：是否交換 x 和 y 軸
       equidistant=False,           # 預設值：是否使用等距的電極位置
-      showTopo=False,              # 預設值：是否顯示地形
+      showTopo=False,              # 目前未完成的功能
       xlabel=None,                 # 預設值：x 軸標籤
       ylabel=None                  # 預設值：y 軸標籤
   )
