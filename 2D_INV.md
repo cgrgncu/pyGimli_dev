@@ -179,4 +179,8 @@ ERT 調查設計常常需要在探測深度和數據品質之間進行權衡：
   ```
 
 ### 準備逆推要用的最少量資料
-+ 
++ 至少要有類似這樣的欄位:
+  ```python
+  print(data)
+  # Data: Sensors: 65 data: 26267, nonzero entries: ['a', 'b', 'err', 'k', 'm', 'n', 'r', 'rhoa', 'valid']
+  ```
