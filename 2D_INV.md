@@ -5,12 +5,18 @@
 + 參考: https://github.com/gimli-org/transform2022/blob/main/2_Lake.ipynb
   + 這裡有提供範例檔案及示範如何載入資料。
   ```python
-  # 預設呼叫方法
+  # 預設呼叫方法，寫在importData.py中，其實是去呼叫pg.load
   data = ert.load("data/lake.ohm")
-  # 等價於以下寫法
-  data = pg.physics.ert.load("my_ert_data.dat", verbose=False, ensureKRhoa=False)
+  print(f"data 物件的類型是: {type(data)}")
+  # ohm檔案是pygimli統一支援的檔案格式，可用load函數載入為ERT資料(pg.DataContainerERT)
+  # 預設統一呼叫方法
+  data = pg.load("data/lake.ohm")
+  print(f"data 物件的類型是: {type(data)}")
+  # 等價的呼叫方法
+  data = pg.load("data/lake.ohm", verbose=False, testAll=True, realName=None)
+  # 以上方法擇一即可
   ```
-+ 這個ert.load事實上是寫在importData.py中，會呼叫
+  
 + 可以用ert.show(data, vals='rhoa', logScale=True, circular=True) 來繪圖
   + 可是circular效果不是很好，最好別用
   ```python
