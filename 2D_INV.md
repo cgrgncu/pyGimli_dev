@@ -46,6 +46,10 @@
   # 確保是座標軸對象，並加入標題與軸標籤
   ax.set_title("視電阻率分佈圖", fontsize=14)
   ax.set_xlabel("水平距離 (m)")
+  # 不用科學記號的 colorbar 數值
+  from matplotlib.ticker import ScalarFormatter
+  cbar.ax.xaxis.set_major_formatter(ScalarFormatter(useMathText=False))
+  cbar.ax.xaxis.get_offset_text().set_visible(False)  # 避免顯示 1eX
   # 保存為圖檔（如 PNG 格式）
   fig = ax.get_figure()  # 取得對應的 figure 物件
   fig.savefig("AppRes_distribution.png", dpi=300, bbox_inches='tight')  # 儲存為 PNG 檔案，300 dpi，緊密邊框
