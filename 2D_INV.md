@@ -19,7 +19,6 @@
   ```
   
 + 可以用ert.show 來繪圖
-  + 我覺得circular效果不是很好，最好別用。
   ```python
   # 預設呼叫方法
   ert.show(data)
@@ -32,6 +31,25 @@
       xlabel=None,                 # 預設值：x 軸標籤
       ylabel=None                  # 預設值：y 軸標籤
   )
+  ```
++ 如果想存成圖檔
+  ```python
+  # 使用 ert.show() 來顯示 rhoa（視電阻率），並自動決定色階範圍
+  ax, cbar = ert.show(
+        data,                        # 必須的參數：DataContainerERT 物件
+        vals='rhoa',                 # 預設值：要繪製的數據欄位名稱，預設是 'rhoa'（電阻率）
+        logScale=False,              # 預設值：根據數據值來決定是否使用對數尺度，這裡默認使用對數尺度
+        label='Apparent resistivity (Ωm)',                  # colorbar的標題，不填就自動產生Apparent resistivity (Ωm)。
+        xlabel=None,                 # 預設值：x 軸標籤
+        ylabel=None                  # 預設值：y 軸標籤
+    )
+  # 確保是座標軸對象，並加入標題與軸標籤
+  ax.set_title("視電阻率分佈圖", fontsize=14)
+  ax.set_xlabel("水平距離 (m)")
+  # 保存為圖檔（如 PNG 格式）
+  fig = ax.get_figure()  # 取得對應的 figure 物件
+  fig.savefig("AppRes_distribution.png", dpi=300, bbox_inches='tight')  # 儲存為 PNG 檔案，300 dpi，緊密邊框
+  plt.close(fig)  # 不顯示圖形
   ```
 ### 準備逆推要用的最少量資料
 + 
