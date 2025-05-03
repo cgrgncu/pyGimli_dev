@@ -55,5 +55,9 @@
   fig.savefig("AppRes_distribution.png", dpi=300, bbox_inches='tight')  # 儲存為 PNG 檔案，300 dpi，緊密邊框
   plt.close(fig)  # 不顯示圖形
   ```
++ 可以用data.save 來存出ohm檔案
+  ```python
+  data.save("my_data.ohm")
+  ```
 ### 準備逆推要用的最少量資料
 + 
