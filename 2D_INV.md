@@ -26,11 +26,8 @@
   # 等價於以下寫法
   ax, cbar = ert.show(
       data,                        # 必須的參數：DataContainerERT 物件
-      vals='rhoa',                 # 預設值：要繪製的數據欄位名稱，預設是 'rhoa'（電阻率）
-      x=None,                      # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
-      y=None,                      # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
-      style=None,                  # 預設值：None，使用傳統擬似剖面繪製。若設定其他值則會觸發矩陣類型擬似剖面繪製。
-      logScale=True,               # 預設值：根據數據值來決定是否使用對數尺度，這裡默認使用對數尺度
+      vals='rhoa',                 # 預設值：要繪製的數據欄位名稱，預設是 'rhoa'（電阻率）      
+      logScale=False,              # 預設值：預設不使用對數尺度
       cMap=None,                   # 預設值：顏色映射（使用 'rhoa' 的預設顏色映射）
       label=None,                  # 預設值：數據欄位的標籤，默認使用欄位的單位
       switchxy=False,              # 預設值：是否交換 x 和 y 軸
