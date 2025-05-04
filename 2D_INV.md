@@ -216,3 +216,17 @@ ERT 調查設計常常需要在探測深度和數據品質之間進行權衡：
   print(data)
   # Data: Sensors: 65 data: 26267, nonzero entries: ['a', 'b', 'err', 'k', 'm', 'n', 'r', 'rhoa', 'valid']
   ```
+
++ 跑逆推
+  ```python
+  data['k'] = ert.createGeometricFactors(data, numerical=True)
+  data['rhoa'] = data['k'] * data['r']
+  data['err'] = ert.estimateError(data, relativeError=0.03) #找不到data['u']時，變成直接指定為0.03。
+  mgr = ert.ERTManager(data)
+  #help(mgr.invert)
+  print('*****')
+  mgr.invert(data)
+  #mgr.showResult();
+  mgr.showResult(cMin=2, cMax=200, xlabel="x (m)", ylabel="z (m)");
+  mgr.showFit();
+  ```
