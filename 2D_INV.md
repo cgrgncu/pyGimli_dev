@@ -17,6 +17,7 @@
   print(f"data 物件的類型是: {type(data)}")
   # 因為我已經知道是ohm檔案，其實就只是呼叫以下:
   data = pg.DataContainerERT("data/lake.ohm")
+  print(f"data 物件的類型是: {type(data)}")
   # 以上方法擇一即可
   ```
   
