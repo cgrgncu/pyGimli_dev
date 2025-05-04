@@ -15,6 +15,8 @@
   # 等價的呼叫方法
   data = pg.load("data/lake.ohm", verbose=False, testAll=True, realName=None)
   print(f"data 物件的類型是: {type(data)}")
+  # 因為我已經知道是ohm檔案，其實就只是呼叫以下:
+  data = pg.DataContainerERT("data/lake.ohm")
   # 以上方法擇一即可
   ```
   
