@@ -181,6 +181,35 @@ ERT 調查設計常常需要在探測深度和數據品質之間進行權衡：
   data['rhoa'] = data['k'] * data['r']
   ```
 
+### 誤差ERR
++ 儀器量測的供參考，但不適合放入逆推中。
+  + 取代方式1:指定誤差都是3%
+  ```  print("呼叫ERT工具，指定逆推使用的誤差...")
+  #--
+  # 參考: https://github.com/gimli-org/transform2022/blob/main/2_Lake.ipynb
+  # The data are measured standard devitations and should not be used for inversion. Instead, we estimate new errors.
+  # 我的理解:
+  # 目前的資料誤差欄位(err)是根據「量測標準差」填入的，不適合直接用來反演。
+  # 因為量測標準差不一定能反映真實誤差，特別是在現場條件不佳或系統誤差存在時。
+  # 所以我們應該自行估算一組新的誤差值，用於反演中的加權矩陣。
+  # 實作:
+  # 如果觀測資料有err欄位，通常建議不要採用。
+  # 若存在u資料(電壓資料，單位:[V])，則可以利用: data["err"] = ert.estimateError(data, relativeError=0.02, absoluteUError=100e-6)
+  # 若沒有，則直接給定一個誤差值。建議0.03，或稱3%。
+  #--
+  # Estimate relative error
+  data['err'] = ert.estimateError(data, relativeError=0.03) #找不到data['u']時，變成直接指定為0.03。
+  print("呼叫ERT工具，指定逆推使用的誤差...完成!")
+  print("--")
+  print("展示追加後的資料欄位:")
+  print(data)
+  print("--")
+  print("展示誤差誤差統計資訊：")
+  print(f"  最小值: {np.array(data['err']).min():.2f}")
+  print(f"  最大值: {np.array(data['err']).max():.2f}")
+  print(f"  平均值: {np.array(data['err']).mean():.2f}")
+  print("--")
+  ```
 ### 準備逆推要用的最少量資料
 + 至少要有類似這樣的欄位:
   ```python
