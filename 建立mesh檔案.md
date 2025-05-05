@@ -5,12 +5,11 @@
 # 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
 from pygimli.physics import ert
 #--------------------------------------------
-# 使用 ert.load 載入 "data/lake.ohm" 的 ERT 資料到 'data' 變數
-data = ert.load("data/lake.ohm")
+
 #--------------------------------------------
 # 1. 讀取資料
 print("讀取 .ohm 檔...")
-data = ert.load(ohm_file_name)
+data = ert.load("data/lake.ohm")
 print("讀取 .ohm 檔...完成!")
 print(f"data 物件的類型是: {type(data)}")
 print("展示內容:")
