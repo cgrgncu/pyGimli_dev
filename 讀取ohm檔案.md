@@ -35,6 +35,10 @@ print(type(data))
 #--
 # 輸出 'data' 物件的所有屬性和方法名稱，有需要再查看
 #print(dir(data))
+#--
+# 取出感應器清單，許多範例建議用pg.x、pg.y、pg.z
+x=pg.x(data)
+print(type(data))
 ```
 
 ### ERT資料格式
