@@ -2,9 +2,18 @@
 + 建議用法: 使用資料data來產生mesh並逆推，然後取出mesh。
 ```python
 #--------------------------------------------
+# 引入 pygimli
+import pygimli as pg
+#--------------------------------------------
+#--------------------------------------------
+# 引入 numpy
+import numpy as np
+#--------------------------------------------
+#--------------------------------------------
 # 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
 from pygimli.physics import ert
 #--------------------------------------------
+
 
 #--------------------------------------------
 # 1. 讀取資料
@@ -92,13 +101,19 @@ except Exception as e:
     print(f"訪問 mgr.model 時發生錯誤: {e}")
 print("--")
 
-#help(mgr.invert)
+print("--")
+# 運行逆推(沒有給予指定mesh，將依照data自動生成)
 mgr.invert(data)
+print("--")
+print("--")
 
 print(f"mgr.mesh 物件的類型是: {type(mgr.mesh)}")
-#help(mgr.mesh)
-pg.show(mgr.mesh)
+# 展示mesh與電極
+ax, cb = pg.show(mgr.mesh)
+ax.plot(np.array(pg.x(data)), np.array(pg.y(data)), 'rv')
 
+# 展示mesh與電極與邊界
 from pygimli.viewer import showMesh # import a function
 showMesh(mgr.mesh, markers=True, showMesh=True)
+ax.plot(np.array(pg.x(data)), np.array(pg.y(data)), 'rv')
 ```
