@@ -20,9 +20,11 @@ print(f"data 物件的類型是: {type(data)}")
 ```
 + 建議用法: 優先使用ERT模組包裝的方法
 ```
+#--------------------------------------------
 # 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
 from pygimli.physics import ert
-#--
+#--------------------------------------------
+#--------------------------------------------
 # 使用 ert.load 載入 "data/lake.ohm" 的 ERT 資料到 'data' 變數
 data = ert.load("data/lake.ohm")
 #--
@@ -35,7 +37,7 @@ print(type(data))
 #--
 # 輸出 'data' 物件的所有屬性和方法名稱，有需要再查看
 #print(dir(data))
-#--
+#--------------------------------------------
 # 取出感應器資訊
 # 許多範例建議用pg.x、pg.y、pg.z取出清單，會回傳<class 'pgcore._pygimli_.RVector'>
 # 但我建議多使用data本身的方法與屬性
@@ -43,22 +45,45 @@ print(type(data))
 # 1. 預覽data內容
 print(data)
 # 會印出 Data: Sensors: 38 data: 222, nonzero entries: ['a', 'b', 'm', 'n', 'r', 'valid']
+#--
 # 2. 取出感應器資料數量
 print(data.sensorCount())
 # 會印出 38
-# 3. 取出觀測資料數量
+#--
+# 3.1 取得電極位置
+electrodes_position_array = data.sensors().array()
+x_values = electrodes_position_array[:, 0]
+y_values = electrodes_position_array[:, 1]
+z_values = electrodes_position_array[:, 2]
+#--
+# 3.2 假設所有陣列長度相同，展示內容:
+print("資料欄位及其內容：")
+for i in range(len(x_values)):
+    print(f"{x_values[i]},{y_values[i]},{z_values[i]}")
+# 會印出以下:
+# 資料欄位及其內容：
+# 0.0,0.0,108.8
+# 1.5692,0.0,110.03999999999999
+# 3.13841,0.0,111.28
+# ...
+# 可以觀察到在記憶體中數值儲存的變數可能是更高解析度的變數
+# 但數值應可認為是一致的
+#--
+# 4. 取出觀測資料數量
 print(data.sensorCount())
 # 會印出222
-# 4. 印出有存在的資料欄位
+#--
+# 5. 印出有存在的資料欄位
 print(data.dataMap)
 # 會印出 <bound method dataMap of Data: Sensors: 38 data: 222, nonzero entries: ['a', 'b', 'm', 'n', 'r', 'valid']>
-# 5.1 取出資料數值
+#--
+# 6.1 取出資料數值
 a_values = data['a']
 b_values = data['b']
 m_values = data['m']
 n_values = data['n']
 r_values = data['r']
-# 5.2 假設所有陣列長度相同，展示內容:
+# 6.2 假設所有陣列長度相同，展示內容:
 print("資料欄位及其內容：")
 for i in range(len(a_values)):
     print(f"{a_values[i]},{b_values[i]},{m_values[i]},{n_values[i]},{r_values[i]}")
