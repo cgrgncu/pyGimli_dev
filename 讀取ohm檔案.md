@@ -20,8 +20,21 @@ print(f"data 物件的類型是: {type(data)}")
 ```
 + 建議用法: 優先使用ERT模組包裝的方法
 ```
+# 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
 from pygimli.physics import ert
+#--
+# 使用 ert.load 載入 "data/lake.ohm" 的 ERT 資料到 'data' 變數
 data = ert.load("data/lake.ohm")
+#--
+# 顯示 'data' 物件的說明文件，包含其類別、方法和屬性，有需要再查看
+#help(data)
+#--
+# 印出變數 'data' 的資料型態，有需要再查看
+print(type(data))
+# 會印出 <class 'pgcore._pygimli_.DataContainerERT'>
+#--
+# 輸出 'data' 物件的所有屬性和方法名稱，有需要再查看
+#print(dir(data))
 ```
 
 ### ERT資料格式
