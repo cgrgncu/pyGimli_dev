@@ -57,7 +57,7 @@ y_values = electrodes_position_array[:, 1]
 z_values = electrodes_position_array[:, 2]
 #--
 # 3.2 假設所有陣列長度相同，展示內容:
-print("資料欄位及其內容：")
+print("資料欄位及其內容(x,y,z)：")
 for i in range(len(x_values)):
     print(f"{x_values[i]},{y_values[i]},{z_values[i]}")
 # 會印出以下:
@@ -84,7 +84,7 @@ m_values = data['m']
 n_values = data['n']
 r_values = data['r']
 # 6.2 假設所有陣列長度相同，展示內容:
-print("資料欄位及其內容：")
+print("資料欄位及其內容(a,b,m,n,r)：")
 for i in range(len(a_values)):
     print(f"{a_values[i]},{b_values[i]},{m_values[i]},{n_values[i]},{r_values[i]}")
 # 會印出以下:
