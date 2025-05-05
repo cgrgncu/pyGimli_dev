@@ -1,5 +1,29 @@
 # 整理 讀取ohm檔案的範例
 
+### 讀取方式
++ 研究:
+```python
+# 預設呼叫方法，寫在importData.py中，其實是去呼叫pg.load
+data = ert.load("data/lake.ohm")
+print(f"data 物件的類型是: {type(data)}")
+# ohm檔案是pygimli統一支援的檔案格式，可用load函數載入為ERT資料(pg.DataContainerERT)
+# 預設統一呼叫方法
+data = pg.load("data/lake.ohm")
+print(f"data 物件的類型是: {type(data)}")
+# 等價的呼叫方法
+data = pg.load("data/lake.ohm", verbose=False, testAll=True, realName=None)
+print(f"data 物件的類型是: {type(data)}")
+# 因為我已經知道是ohm檔案，其實就只是呼叫以下:
+data = pg.DataContainerERT("data/lake.ohm")
+print(f"data 物件的類型是: {type(data)}")
+# 以上方法擇一即可
+```
++ 建議用法: 優先使用ERT模組包裝的方法
+```
+from pygimli.physics import ert
+data = ert.load("data/lake.ohm")
+```
+
 ### ERT資料格式
 + 參考: http://resistivity.net/bert/data_format.html
 ```
