@@ -36,9 +36,20 @@ print(type(data))
 # 輸出 'data' 物件的所有屬性和方法名稱，有需要再查看
 #print(dir(data))
 #--
-# 取出感應器清單，許多範例建議用pg.x、pg.y、pg.z
-x=pg.x(data)
-print(type(data))
+# 取出感應器資訊
+# 許多範例建議用pg.x、pg.y、pg.z取出清單，會回傳<class 'pgcore._pygimli_.RVector'>
+# 但我建議多使用data本身的方法與屬性
+# 範例:
+# 1. 預覽data內容
+print(data)
+# 會印出 Data: Sensors: 38 data: 222, nonzero entries: ['a', 'b', 'm', 'n', 'r', 'valid']
+# 2. 取出感應器資料數量
+print(data.sensorCount())
+# 會印出 38
+# 3. 取出觀測資料數量
+print(data.sensorCount())
+# 會印出222
+
 ```
 
 ### ERT資料格式
