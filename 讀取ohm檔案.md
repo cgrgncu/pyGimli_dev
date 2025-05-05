@@ -49,7 +49,28 @@ print(data.sensorCount())
 # 3. 取出觀測資料數量
 print(data.sensorCount())
 # 會印出222
-
+# 4. 印出有存在的資料欄位
+print(data.dataMap)
+# 會印出 <bound method dataMap of Data: Sensors: 38 data: 222, nonzero entries: ['a', 'b', 'm', 'n', 'r', 'valid']>
+# 5.1 取出資料數值
+a_values = data['a']
+b_values = data['b']
+m_values = data['m']
+n_values = data['n']
+r_values = data['r']
+# 5.2 假設所有陣列長度相同，展示內容:
+print("資料欄位及其內容：")
+for i in range(len(a_values)):
+    print(f"{a_values[i]},{b_values[i]},{m_values[i]},{n_values[i]},{r_values[i]}")
+# 會印出以下:
+# 資料欄位及其內容：
+# 0,3,1,2,1.18411
+# 1,4,2,3,1.54858
+# 2,5,3,4,1.6202
+# ...
+# 可以觀察到在記憶體中不是用1開始編電極編號。檔案中卻是用1開始編號。
+# 記憶體中，-1表示無窮遠處；檔案中0代表無窮遠處。
+#--
 ```
 
 ### ERT資料格式
