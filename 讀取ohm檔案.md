@@ -19,7 +19,7 @@ print(f"data 物件的類型是: {type(data)}")
 # 以上方法擇一即可
 ```
 + 建議用法: 優先使用ERT模組包裝的方法
-```
+```python
 #--------------------------------------------
 # 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
 from pygimli.physics import ert
