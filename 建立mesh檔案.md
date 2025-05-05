@@ -95,4 +95,10 @@ print("--")
 #help(mgr.invert)
 mgr.invert(data)
 
+print(f"mgr.mesh 物件的類型是: {type(mgr.mesh)}")
+#help(mgr.mesh)
+pg.show(mgr.mesh)
+
+from pygimli.viewer import showMesh # import a function
+showMesh(mgr.mesh, markers=True, showMesh=True)
 ```
