@@ -117,3 +117,46 @@ from pygimli.viewer import showMesh # import a function
 showMesh(mgr.mesh, markers=True, showMesh=True)
 ax.plot(np.array(pg.x(data)), np.array(pg.y(data)), 'rv')
 ```
++ 進階使用: 用參數建立三角網格(依照data的x,z產生)
+```python
+#--------------------------------------------
+# 引入 pygimli
+import pygimli as pg
+#--------------------------------------------
+#--------------------------------------------
+# 引入 numpy
+import numpy as np
+#--------------------------------------------
+#--------------------------------------------
+# 引入 pygimli 中處理電阻率成像 (ERT) 的 ert 模組
+from pygimli.physics import ert
+#--------------------------------------------
+#--------------------------------------------
+# 引入 pygimli 中處理網格 的 meshtools 模組
+from pygimli import meshtools as mt
+
+#--------------------------------------------
+# 讀取資料
+print("讀取 .ohm 檔...")
+data = ert.load("data/lake.ohm")
+print("讀取 .ohm 檔...完成!")
+print(f"data 物件的類型是: {type(data)}")
+print("展示內容:")
+print(data)
+print("--")
+# 建立三角網格
+mesh=mt.createParaMesh(data, quality=34, paraDX=0.4, balanceDepth=True, paraDepth=30)
+print(f"mesh 物件的類型是: {type(mesh)}")
+# 展示mesh與電極
+ax, cb = pg.show(mesh)
+ax.plot(np.array(pg.x(data)), np.array(pg.z(data)), 'rv')
+# 展示mesh與電極與邊界
+from pygimli.viewer import showMesh # import a function
+showMesh(mesh, markers=True, showMesh=True)
+#--------------------------------------------
+```
+
++ 進階使用: 用參數建立方型網格(依照data的x產生)
+```python
+
+```
