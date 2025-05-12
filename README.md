@@ -40,7 +40,7 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
     + 逆推問題簡化的數學模型為 d=G(m)。d為資料，G為前向算子 (負責將模型轉換為理論資料，可以是線性或非線性的) ，m為模型。一般而言，G依照理論建構，d為觀測量，m為所求。
     + ERT為非線性的向前算子。逆推計算需使用迭代的方式求解，逐步逼近最佳解。求解方法常見的有:
       + 高斯-牛頓法 (Gauss-Newton method)
-      + Levenberg-Marquardt 法 (L-M method)，基於高斯-牛頓框架，PyGimli 標準採用此方法。
+      + Levenberg-Marquardt 法 (L-M method)，基於高斯-牛頓框架，PyGimli 採用此方法，允許動態改變lam。
       + 最速下降法 (Steepest Descent)
       + 共軛梯度法 (Conjugate Gradient method, CG)
       + 擬牛頓法 (Quasi-Newton methods, 例如 BFGS, L-BFGS)
