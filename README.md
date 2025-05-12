@@ -37,7 +37,13 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
     5. 順推計算將模擬單位電流 (例如 1 安培) 從 A 電極注入、從 B 電極引出時，在整個建模區域內產生的電位場分佈 (V)，單位:伏特。可以利用這個結果來計算針對任何 ABMN 電極組合的觀測量。常見為I_AB=1[A]，計算出V_mn[V]、R_ABMN[Ohm]、Rhoa_ABMN[Ohm-m]。ABMN的位置要求是必須在建模區域內(包含網格邊界與網格內部)，可設置於建模區域內的任意位置，例如井下電極所在位置；也可以設置於地表邊界上，例如地表電極所在位置。
 
   + 逆推計算: 採用高斯牛頓法 (Gauss-Newton method) 來求解。這是一種迭代優化演算法，用於尋找最佳的地下模型，以最小化理論數據與觀測數據之間的差異。
-
+    + 逆推問題簡化的數學模型為 d=G(m)。d為資料，G為前向算子 (負責將模型轉換為理論資料，可以是線性或非線性的) ，m為模型。一般而言，G依照理論建構，d為觀測量，m為所求。
+    + ERT為非線性的向前算子。逆推計算需使用迭代的方式求解，逐步逼近最佳解。求解方法常見的有:
+      + 高斯-牛頓法 (Gauss-Newton method)
+      + Levenberg-Marquardt 法 (L-M method)，基於高斯-牛頓框架，PyGimli 標準採用此方法。
+      + 最速下降法 (Steepest Descent)
+      + 共軛梯度法 (Conjugate Gradient method, CG)
+      + 擬牛頓法 (Quasi-Newton methods, 例如 BFGS, L-BFGS)
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
 + https://docs.anaconda.com/free/miniconda/
