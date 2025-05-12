@@ -44,6 +44,7 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
       + 最速下降法 (Steepest Descent)
       + 共軛梯度法 (Conjugate Gradient method, CG)
       + 擬牛頓法 (Quasi-Newton methods, 例如 BFGS, L-BFGS)
+    + 逆推問題的本質是利用有限的觀測資料 (Nd個數據) 去求解一個參數數量通常也有限的模型 (Nm個參數)。因此，選擇合適的Nd與Nm之間的比例是必要的，以提供足夠的來自數據的約束，期待不會發生「欠定(underdetermined)」的狀態。由於：數據雜訊 (Data Noise)、資料特性（例如，敏感度分佈不均，數據之間存在相關性或冗餘，導致來自數據的有效獨立信息量少於數據點數量）、物理問題固有的病態性 (Ill-posedness)，即使觀測資料數量 (Nd) 在數量上看似足夠（例如 Nd>Nm），問題在某些模型參數上仍然可能屬於「欠定(underdetermined)」的狀態。
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
 + https://docs.anaconda.com/free/miniconda/
