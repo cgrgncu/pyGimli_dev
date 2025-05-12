@@ -53,6 +53,147 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
         + 反之，若網格過粗（Nm過小）而數據豐沛（Nd過大）時，數學上雖是超定 (overdetermined) 的，但模型的表示能力有限，難以充分擬合大量數據中包含的所有細節。這會導致數據擬合困難，且反演結果的解析度被限制在粗糙的網格尺度上，無法利用多餘數據來解析更精細的構造，浪費了數據潛力。
         + 因此，網格設計應與數據信息量相稱，選擇一個恰當的網格細密程度，既要提供足夠的模型參數來捕捉數據所能解析的細節，亦要避免過於複雜而陷入嚴重欠定，以導引出穩定、可靠且能合理擬合觀測數據的地下模型。
         + 如果有很多的數據，想要降低數量，可以考慮選擇敏感度閾值篩選。
+        ```python
+        import pygimli as pg
+        import pygimli.meshtools as mt
+        from pygimli.ert import createDataContainer, ERTManager
+        import numpy as np
+        import matplotlib.pyplot as plt
+        # 確保可以顯示中文
+        plt.rcParams['font.sans-serif'] = ['Arial Unicode MS'] # 或其他支持中文的字體
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        # --- 1. 建立一個簡單的地電阻測量幾何和網格 ---
+        # 定義電極位置 (沿 x 軸)
+        electrode_positions = np.linspace(0, 10, 11) # 11個電極，間距1米
+        # 建立一個簡單的測量佈置，例如 Wenner
+        # 這裡只用於定義數據點的數量和結構，不包含實際量測值
+        data_container = createDataContainer(electrode_positions, elTyp='Wenner')
+        Nd = data_container.size() # 數據點數量
+        print(f"建立包含 {Nd} 個數據點的資料容器 (DataContainer)")
+        
+        # 建立一個適合這個測線的網格，用於正向計算和模型參數化
+        # 通常網格會比電極範圍更廣更深，並在測量區域附近更細密
+        mesh = mt.createParaMesh(electrode_positions, verbose=False)
+        # 增加深度和橫向範圍，並細化網格 (這裡僅為示例)
+        mesh = mt.createMesh(mesh, refine=True, nCols=15, nRows=10)
+        mesh = mesh.createP2() # 將網格轉換為二次基函數 (P2)，適合 FEM 正向計算
+        Nm = mesh.cellCount() # 網格單元數量 (每個單元通常對應一個模型參數)
+        print(f"建立包含 {Nm} 個網格單元的模型網格 (Mesh)")
+        print(f"數據點數量 ({Nd}) 與網格單元數量 ({Nm}) 的比例大致為 {Nd}:{Nm} = {Nd/Nm:.2f}:1")
+        
+        # --- 2. 建立順推算子 ForwardOperator ---
+        # ERTManager 是一個方便的類，它內部會建立和管理 ForwardOperator 和 Inversion 物件
+        # 雖然這裡沒有觀測數據，但我們需要 ERTManager 來設定 ForwardOperator 的網格和數據結構
+        manager = ERTManager(data=data_container, mesh=mesh)
+        fop = manager.fop # 取得 ForwardOperator 物件
+        
+        # 敏感度計算需要一個模型作為輸入。
+        # 這裡使用一個簡單的均勻模型作為計算敏感度的代表性模型。
+        # 在實際應用中，你也可以使用通過快速初步反演獲得的模型，它可能更接近真實地下情況，計算出的敏感度也更具參考價值。
+        homogeneous_conductivity = 0.1 # 設定一個均勻電導率值 (例如 0.1 S/m)
+        model_for_sensitivity = np.full(Nm, homogeneous_conductivity) # 建立模型向量
+        
+        # 將用於計算敏感度的模型設定給 ForwardOperator
+        fop.setModel(model_for_sensitivity)
+        
+        # --- 3. 計算敏感度矩陣 (Jacobian) ---
+        # jacobian() 方法會計算在目前設定的模型下的敏感度矩陣 J
+        # J 是一個 Nd x Nm 的矩陣，J[i, j] 表示第 i 個數據點對第 j 個模型單元的敏感度
+        J = fop.jacobian()
+        print(f"計算敏感度矩陣 J, 形狀為 {J.shape} (數據點數 x 模型參數數)")
+        
+        # --- 4. 計算每個數據點的敏感度衡量標準 ---
+        # 敏感度矩陣 J 的每一行對應一個數據點。我們計算每個數據點（每一行）的敏感度衡量值。
+        # 這些值可以衡量每個數據點對整個模型（或特定區域）的總體敏感度影響。
+        sensitivity_measures = {}
+        
+        # 最大絕對敏感度：每個數據點對模型參數的最大敏感度 (max(abs(J[i, :])))
+        # 衡量一個數據點對地下「最敏感」區域的影響力
+        sensitivity_measures['最大絕對敏感度'] = np.max(np.abs(J), axis=1)
+        
+        # 絕對敏感度之和：每個數據點對所有模型參數的絕對敏感度之和 (sum(abs(J[i, :])))
+        # 衡量一個數據點對整個地下模型的總體影響力
+        sensitivity_measures['絕對敏感度總和'] = np.sum(np.abs(J), axis=1)
+        
+        # L2 範數 (Root-Mean-Square Sensitivity): 另一種衡量總體敏感度的方法 (sqrt(sum(J[i, :]^2)))
+        sensitivity_measures['L2範數'] = np.linalg.norm(J, axis=1)
+        
+        print(f"計算了 {Nd} 個數據點的敏感度衡量值 ({', '.join(sensitivity_measures.keys())})")
+        
+        # --- 5. 分析敏感度衡量值的分布 ---
+        # 使用直方圖來可視化不同敏感度衡量值的分布情況
+        plt.figure(figsize=(15, 5)) # 調整圖形大小
+        
+        for i, (name, values) in enumerate(sensitivity_measures.items()):
+            plt.subplot(1, len(sensitivity_measures), i + 1) # 根據衡量標準數量創建子圖
+            # 繪製直方圖，使用對數軸以便看清低敏感度數據點的分布
+            plt.hist(values, bins=50, log=True, edgecolor='black', alpha=0.7)
+            plt.title(f"{name} 的分布")
+            plt.xlabel("敏感度衡量值")
+            plt.ylabel("數據點數量 (對數軸)")
+            plt.grid(True, which='both', linestyle='--', alpha=0.6)
+        
+        plt.tight_layout() # 自動調整子圖間距
+        plt.show()
+        
+        # 使用統計摘要來了解分布特徵，這有助於決定閾值
+        print("\n敏感度衡量值的統計摘要:")
+        for name, values in sensitivity_measures.items():
+            print(f"  {name}:")
+            print(f"    最小值 (Min): {np.min(values):.4e}") # 科學記號顯示
+            print(f"    最大值 (Max): {np.max(values):.4e}")
+            print(f"    平均值 (Mean): {np.mean(values):.4e}")
+            print(f"    中位數 (Median): {np.median(values):.4e}")
+            print(f"    標準差 (StdDev): {np.std(values):.4e}")
+            # 計算一些百分位數，例如第 5, 10, 25, 50, 75, 90, 95, 99 百分位
+            percentiles = np.percentile(values, [5, 10, 25, 50, 75, 90, 95, 99])
+            print(f"    百分位數 (5, 10, 25, 50, 75, 90, 95, 99): [{', '.join(['{:.4e}'.format(p) for p in percentiles])}]")
+        
+        
+        # --- 6. 決定門檻 (Threshold) ---
+        # 根據步驟 5 的分布分析，來決定一個合適的閾值。
+        # 例如，你觀察直方圖後，決定移除那些「最大絕對敏感度」位於最低的 15% 的數據點。
+        chosen_measure_name = '最大絕對敏感度' # 選擇基於最大絕對敏感度
+        chosen_measure_values = sensitivity_measures[chosen_measure_name]
+        
+        threshold_percentile_to_remove = 15 # 決定移除最低的 15% 的數據點
+        threshold_value = np.percentile(chosen_measure_values, threshold_percentile_to_remove)
+        
+        print(f"\n根據 '{chosen_measure_name}' 的分布，決定移除位於最低 {threshold_percentile_to_remove}% 的數據點")
+        print(f"計算出的敏感度閾值為: {threshold_value:.4e}")
+        
+        # --- 7. 基於門檻選擇數據點 ---
+        # 找出敏感度衡量值大於或等於閾值的數據點索引，這些是要保留的點
+        retained_indices = np.where(chosen_measure_values >= threshold_value)[0]
+        # 找出敏感度衡量值小於閾值的數據點索引，這些是要移除的點
+        removed_indices = np.where(chosen_measure_values < threshold_value)[0]
+        
+        print(f"\n原始數據點數量: {Nd}")
+        print(f"保留的數據點數量: {len(retained_indices)}")
+        print(f"移除的數據點數量: {len(removed_indices)}")
+        print(f"移除比例: {len(removed_indices) / Nd:.2%}")
+        
+        # 從原始數據容器中選擇數據：
+        # 如果你的原始觀測數據儲存在一個叫做 original_data_container 的 PyGimli DataContainer 物件中，
+        # 你可以使用 .select() 方法來創建一個包含保留數據點的新容器。
+        # 這裡我們使用上面建立的 dummy data_container 來示範
+        # original_data_container = pg.load("your_measured_data.dat") # 假設你從文件載入數據
+        selected_data_container = data_container.select(retained_indices)
+        
+        
+        print(f"\n建立了包含 {selected_data_container.size()} 個保留數據點的新資料容器 (DataContainer)。")
+        print("這個新的資料容器 (selected_data_container) 可以用於後續的反演計算 (例如 manager.setData(selected_data_container))。")
+        
+        # --- 實際應用注意事項 ---
+        print("\n--- 實際應用注意事項 ---")
+        print("1. **代表性模型**：用於計算敏感度的模型會影響 J。均勻模型是簡化，通常用初步反演結果計算敏感度更佳。")
+        print("2. **閾值選擇**：沒有硬性規則，需要根據數據品質、地質目標和試錯來決定。視覺化分布和統計摘要是關鍵。")
+        print("3. **敏感度衡量標準**：max_abs, sum_abs, L2 norm 等有不同含義，可以嘗試不同標準看看效果。max_abs 對於識別對『某個』參數敏感的數據有用，sum_abs/L2 norm 則衡量數據對整個模型的總體影響力。")
+        print("4. **丟失獨特敏感度**：即使總體敏感度低，某些數據點可能對地下某個特定區域具有獨特（即使微弱）的敏感度。簡單按閾值移除可能完全失去對該區域的數據約束，需要謹慎。")
+        print("5. **與雜訊關係**：理論上，閾值應與數據點的雜訊水平相結合考慮。例如，如果一個模型參數的潛在變化乘以敏感度小於數據雜訊，那麼這個數據點就無法分辨該參數的變化。")
+        print("6. **迭代過程**：敏感度閾值篩選通常作為反演前的預處理步驟。但更進階的方法可能會在反演迭代過程中動態調整數據權重（如穩健反演）或進行數據選擇。")
+        ```
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
 + https://docs.anaconda.com/free/miniconda/
