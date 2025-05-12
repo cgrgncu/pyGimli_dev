@@ -13,6 +13,12 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
   + 可商用，但要註明保留原作者權利。
 + Python版本限制: 使用3.7以後的穩定版本。但其他相依套件可能有不同版本需求。
 
+### 簡介:
++ pyGIMLI的ERT
+  + 核心運算數值方法: 有限元素法(Finite Element Method, FEM)。
+  + 順推計算: 採用有限元素法 (FEM) 來數值求解描述地下電流分佈和電位場的偏微分方程 (PDE) 。
+  + 逆推計算: 採用高斯牛頓法 (Gauss-Newton method) 來求解。這是一種迭代優化演算法，用於尋找最佳的地下模型，以最小化理論數據與觀測數據之間的差異。
+
 ### 安裝miniconda(在Windows 10)
 + 作業系統: Windows 10
 + https://docs.anaconda.com/free/miniconda/
