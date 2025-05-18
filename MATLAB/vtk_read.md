@@ -287,6 +287,7 @@ if sum(vtk.CELL_TYPES.Data==5)>0
     % 使用 S_Coverage 數值，調整透明度比例使部分網格透明度大於1
     disp(vtk.CELL_DATA.DataHeader{5})
     triangle_FaceVertexAlphaData = triangle_FaceVertexAlphaData + vtk.CELL_DATA.Data(vtk.CELLS.Data(:, 1) == 3,5);
+    triangle_FaceVertexAlphaData=coverageToAlpha(vtk.CELL_DATA.Data(vtk.CELLS.Data(:, 1) == 3,1), 0.4);
     %--
 else
     disp('提示:沒有三角形網格需要繪製!')
@@ -342,6 +343,7 @@ if sum(vtk.CELL_TYPES.Data==9)>0
     % 使用 S_Coverage 數值，調整透明度比例使部分網格透明度大於1
     %disp(vtk.CELL_DATA.DataHeader{5})
     quadrilateral_FaceVertexAlphaData = quadrilateral_FaceVertexAlphaData + vtk.CELL_DATA.Data(vtk.CELLS.Data(:, 1) == 4,5);
+    quadrilateral_FaceVertexAlphaData=coverageToAlpha(vtk.CELL_DATA.Data(vtk.CELLS.Data(:, 1) == 4,1), 0.4);
     %--
 else
     disp('提示:沒有四邊形網格需要繪製!')
@@ -375,5 +377,68 @@ if need_plot_quadrilateral
     disp('四邊形部分繪圖...完成!')
     disp('--')
     %--
+end
+```
+
+### 透明度
+```matlab
+function alphaValues = coverageToAlpha(coverageData, dropThreshold)
+% coverageToAlpha 將任意範圍的 coverage 值映射到 [0,1] 的 alpha 值
+%
+%   alphaValues = coverageToAlpha(coverageData, dropThreshold)
+%
+%   輸入：
+%     coverageData  - 原始 coverage 向量 (Nx1)
+%     dropThreshold - 累積比例閾值 (0~1)，預設 0.4
+%   輸出：
+%     alphaValues   - 大小同 coverageData 的 alpha 向量，所有值 ? [0,1]
+%
+    if nargin < 2
+        dropThreshold = 0.4;
+    end
+
+    % 保證為列向量
+    coverageData = coverageData(:);
+
+    %% 1) 計算直方圖：50 個等寬區間
+    numBins    = 50;
+    % binEdges 長度 numBins+1，從 min 到 max 等距切分
+    binEdges   = linspace(min(coverageData), max(coverageData), numBins+1);
+    % histc 回傳每個 binEdges 槽的計數，長度 = numBins+1
+    binCountsAll = histc(coverageData, binEdges);
+    % 取前 numBins 個對應 [binEdges(i),binEdges(i+1)) 的計數
+    binCounts    = binCountsAll(1:numBins);
+
+    %% 2) 計算累積分布（CDF）
+    cumulativeCounts = cumsum(binCounts);       % 累加每個區間的筆數
+    totalCount       = sum(binCounts);          % 樣本總數
+    cdf              = cumulativeCounts / totalCount;  % 累積比例 ? (0,1]
+
+    %% 3) 找下限 lowerBound：第一個 cdf 超過 2% 的 bin 左邊界
+    idxLower = find(cdf > 0.02, 1, 'first');
+    if isempty(idxLower)
+        lowerBound = binEdges(1);  % 全部 cdf 都 ?2%，用最小邊界
+    else
+        lowerBound = binEdges(idxLower);
+    end
+
+    %% 4) 找上限 upperBound
+    if cdf(1) > dropThreshold
+        % 若最小那格的累積比例就超過閾值，直接取原始最大值
+        upperBound = max(coverageData);
+    else
+        idxHigher = find(cdf < dropThreshold);
+        if isempty(idxHigher)
+            upperBound = binEdges(end);  % 全部 cdf 都 ?閾值，取最大邊界
+        else
+            % 取最後一個累積比例仍小於閾值的 bin 左邊界
+            upperBound = binEdges(idxHigher(end));
+        end
+    end
+
+    %% 5) 線性映射並截斷到 [0,1]
+    alphaValues = (coverageData - lowerBound) / (upperBound - lowerBound);
+    alphaValues(alphaValues < 0) = 0;
+    alphaValues(alphaValues > 1) = 1;
 end
 ```
