@@ -165,13 +165,25 @@ for i in range(len(a_values)):
 #------------------------------------------------------------
 
 #------------------------------------------------------------
-# 注意: 讀檔程式不聰明，觀測資料數量寫在本區塊某一行，其下一行必須是「#A B M N R」。
-#       這個「#A B M N R」不是註解，讀檔要解析...
-#       A,B,M,N均為電極編號，以上方區塊電極位置的順序當作編號，第一個電極為編號1。
-#       R為AB電流與MN電壓比值(V_MN/I_AB)，單位「Ohm」。
+# 注意: 讀檔程式不聰明，觀測資料數量寫在本區塊某一行，其下一行必須是「#a b m n r」。
+#       這個「#a b m n r」不是註解，讀檔要解析...
+#       a,b,m,n均為電極編號，以上方區塊電極位置的順序當作編號，第一個電極為編號1。
+#       r為ab電流與mn電壓比值(V_mn/I_ab)，單位「Ohm」。
+# 提示: 本格式提供很多關鍵字。
+#       **a** **c1** : electrode number for A (C1)
+#       **b** **c2** : electrode number for B (C2)
+#       **m** **p1** : electrode number for M (P1)
+#       **n** **p2** : electrode number for N (P2)
+#       **rhoa** **Ra** : apparent resistivity [Ohm-meter]
+#       **rho** **r** : Resistance [Ohm]
+#       **err** : relative measurement error in %/100 (default)
+#       **ip** : IP measure mRad(default)
+#       **ipErr** : absolute IP measure error in mRad(default)
+#       **i** **I** : Current A(default),mA,uA
+#       **u** **U** : Voltage V(default),mV,uV
 # 觀測資料數量:
 222
-#A B M N R
+#a b m n r
 1	4	2	3	1.18411
 2	5	3	4	1.54858
 3	6	4	5	1.6202
