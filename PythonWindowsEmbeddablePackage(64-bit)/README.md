@@ -89,3 +89,13 @@ Location: C:\PyGimli_Embed_Install\PythonEnv\Lib\site-packages
 Requires: matplotlib, numpy, pgcore, pytest, pyvista, scipy, scooby, tetgen, tqdm
 Required-by:
 ```
+
+### 步驟6(目前測試是不需要此步驟)
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_06.bat**
++ 修改其內容為
+```batch
+PythonEnv\python.exe -m pip uninstall -y numpy
+PythonEnv\python.exe -m pip install numpy==1.26.4
+PAUSE
+```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會把 **numpy** 降版本。運行PyGimli有問題時才需要這個步驟。
