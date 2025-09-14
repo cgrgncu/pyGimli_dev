@@ -96,7 +96,7 @@ Required-by:
 + **PythonEnv** 資料夾容量約為741[MB]
 
 ### 步驟6(目前測試是不需要此步驟)
-+ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_06.bat**
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_06(No_Need).bat**
 + 修改其內容為
 ```batch
 PythonEnv\python.exe -m pip uninstall -y numpy
@@ -285,13 +285,14 @@ pygimli==1.5.4
 + **PythonEnv** 資料夾容量約為741[MB]
 
 ### 步驟9(想要互動式Matplotlib的GUI才需要)
-+ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_09.bat**
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_09(If_Want).bat**
 + 修改其內容為
 ```batch
 PythonEnv\python.exe -m pip install PyQt5
 PAUSE
 ```
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會安裝 **PyQt5** 。
++ **PythonEnv** 資料夾容量約為741[MB]
 
 ### 可以正常使用PyGimli
 + 找個範例來跑
@@ -304,3 +305,170 @@ PAUSE
 ```
 + 然後雙擊運行。正常完成後，按下任意鍵結束。有裝PyQt5就會看到一堆互動視窗，沒裝也會看到輸出了一個 **simple.dat** 檔案
 + 至此，可以把 **PythonEnv** 資料夾搬去任何你想要執行PyGimli的電腦或路徑了，然後搭配正確的呼叫方式。但是目前有點肥大，需要884[MB]。
+
+### 步驟10(不使用互動式Matplotlib的GUI並精簡套件)
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_10(If_Want).bat**
++ 修改其內容為
+```batch
+PythonEnv\python.exe -m pip uninstall -y aiohappyeyeballs
+PythonEnv\python.exe -m pip uninstall -y aiohttp
+PythonEnv\python.exe -m pip uninstall -y aiosignal
+PythonEnv\python.exe -m pip uninstall -y anyio
+PythonEnv\python.exe -m pip uninstall -y argon2-cffi
+PythonEnv\python.exe -m pip uninstall -y argon2-cffi-bindings
+PythonEnv\python.exe -m pip uninstall -y arrow
+PythonEnv\python.exe -m pip uninstall -y asttokens
+PythonEnv\python.exe -m pip uninstall -y attrs
+PythonEnv\python.exe -m pip uninstall -y beautifulsoup4
+PythonEnv\python.exe -m pip uninstall -y bleach
+PythonEnv\python.exe -m pip uninstall -y certifi
+PythonEnv\python.exe -m pip uninstall -y cffi
+PythonEnv\python.exe -m pip uninstall -y charset-normalizer
+PythonEnv\python.exe -m pip uninstall -y cmcrameri
+PythonEnv\python.exe -m pip uninstall -y cmocean
+PythonEnv\python.exe -m pip uninstall -y colorama
+PythonEnv\python.exe -m pip uninstall -y colorcet
+PythonEnv\python.exe -m pip uninstall -y comm
+PythonEnv\python.exe -m pip uninstall -y contourpy
+PythonEnv\python.exe -m pip uninstall -y decorator
+PythonEnv\python.exe -m pip uninstall -y defusedxml
+PythonEnv\python.exe -m pip uninstall -y executing
+PythonEnv\python.exe -m pip uninstall -y fastjsonschema
+PythonEnv\python.exe -m pip uninstall -y fqdn
+PythonEnv\python.exe -m pip uninstall -y frozenlist
+PythonEnv\python.exe -m pip uninstall -y idna
+PythonEnv\python.exe -m pip uninstall -y iniconfig
+PythonEnv\python.exe -m pip uninstall -y ipython
+PythonEnv\python.exe -m pip uninstall -y ipython_pygments_lexers
+PythonEnv\python.exe -m pip uninstall -y ipywidgets
+PythonEnv\python.exe -m pip uninstall -y isoduration
+PythonEnv\python.exe -m pip uninstall -y jedi
+PythonEnv\python.exe -m pip uninstall -y Jinja2
+PythonEnv\python.exe -m pip uninstall -y jsonpointer
+PythonEnv\python.exe -m pip uninstall -y jsonschema
+PythonEnv\python.exe -m pip uninstall -y jsonschema-specifications
+PythonEnv\python.exe -m pip uninstall -y jupyter_client
+PythonEnv\python.exe -m pip uninstall -y jupyter_core
+PythonEnv\python.exe -m pip uninstall -y jupyter-events
+PythonEnv\python.exe -m pip uninstall -y jupyter_server
+PythonEnv\python.exe -m pip uninstall -y jupyter_server_proxy
+PythonEnv\python.exe -m pip uninstall -y jupyter_server_terminals
+PythonEnv\python.exe -m pip uninstall -y jupyterlab_pygments
+PythonEnv\python.exe -m pip uninstall -y jupyterlab_widgets
+PythonEnv\python.exe -m pip uninstall -y lark
+PythonEnv\python.exe -m pip uninstall -y markdown-it-py
+PythonEnv\python.exe -m pip uninstall -y MarkupSafe
+PythonEnv\python.exe -m pip uninstall -y matplotlib-inline
+PythonEnv\python.exe -m pip uninstall -y mdurl
+PythonEnv\python.exe -m pip uninstall -y meshio
+PythonEnv\python.exe -m pip uninstall -y mistune
+PythonEnv\python.exe -m pip uninstall -y more-itertools
+PythonEnv\python.exe -m pip uninstall -y msgpack
+PythonEnv\python.exe -m pip uninstall -y multidict
+PythonEnv\python.exe -m pip uninstall -y nbclient
+PythonEnv\python.exe -m pip uninstall -y nbconvert
+PythonEnv\python.exe -m pip uninstall -y nbformat
+PythonEnv\python.exe -m pip uninstall -y nest-asyncio
+PythonEnv\python.exe -m pip uninstall -y pandocfilters
+PythonEnv\python.exe -m pip uninstall -y parso
+PythonEnv\python.exe -m pip uninstall -y platformdirs
+PythonEnv\python.exe -m pip uninstall -y pluggy
+PythonEnv\python.exe -m pip uninstall -y prometheus_client
+PythonEnv\python.exe -m pip uninstall -y prompt_toolkit
+PythonEnv\python.exe -m pip uninstall -y propcache
+PythonEnv\python.exe -m pip uninstall -y pure_eval
+PythonEnv\python.exe -m pip uninstall -y pycparser
+PythonEnv\python.exe -m pip uninstall -y Pygments
+PythonEnv\python.exe -m pip uninstall -y pytest
+PythonEnv\python.exe -m pip uninstall -y python-json-logger
+PythonEnv\python.exe -m pip uninstall -y pyvista
+PythonEnv\python.exe -m pip uninstall -y pywin32
+PythonEnv\python.exe -m pip uninstall -y pywinpty
+PythonEnv\python.exe -m pip uninstall -y PyYAML
+PythonEnv\python.exe -m pip uninstall -y pyzmq
+PythonEnv\python.exe -m pip uninstall -y PyQt5-Qt5
+PythonEnv\python.exe -m pip uninstall -y PyQt5_sip
+PythonEnv\python.exe -m pip uninstall -y referencing
+PythonEnv\python.exe -m pip uninstall -y requests
+PythonEnv\python.exe -m pip uninstall -y rfc3339-validator
+PythonEnv\python.exe -m pip uninstall -y rfc3986-validator
+PythonEnv\python.exe -m pip uninstall -y rfc3987-syntax
+PythonEnv\python.exe -m pip uninstall -y rich
+PythonEnv\python.exe -m pip uninstall -y rpds-py
+PythonEnv\python.exe -m pip uninstall -y scooby
+PythonEnv\python.exe -m pip uninstall -y Send2Trash
+PythonEnv\python.exe -m pip uninstall -y simpervisor
+PythonEnv\python.exe -m pip uninstall -y sniffio
+PythonEnv\python.exe -m pip uninstall -y soupsieve
+PythonEnv\python.exe -m pip uninstall -y stack-data
+PythonEnv\python.exe -m pip uninstall -y terminado
+PythonEnv\python.exe -m pip uninstall -y tetgen
+PythonEnv\python.exe -m pip uninstall -y tinycss2
+PythonEnv\python.exe -m pip uninstall -y tornado
+PythonEnv\python.exe -m pip uninstall -y tqdm
+PythonEnv\python.exe -m pip uninstall -y traitlets
+PythonEnv\python.exe -m pip uninstall -y trame
+PythonEnv\python.exe -m pip uninstall -y trame-client
+PythonEnv\python.exe -m pip uninstall -y trame-common
+PythonEnv\python.exe -m pip uninstall -y trame-server
+PythonEnv\python.exe -m pip uninstall -y trame-vtk
+PythonEnv\python.exe -m pip uninstall -y trame-vuetify
+PythonEnv\python.exe -m pip uninstall -y types-python-dateutil
+PythonEnv\python.exe -m pip uninstall -y typing_extensions
+PythonEnv\python.exe -m pip uninstall -y uri-template
+PythonEnv\python.exe -m pip uninstall -y urllib3
+PythonEnv\python.exe -m pip uninstall -y vtk
+PythonEnv\python.exe -m pip uninstall -y wcwidth
+PythonEnv\python.exe -m pip uninstall -y webcolors
+PythonEnv\python.exe -m pip uninstall -y webencodings
+PythonEnv\python.exe -m pip uninstall -y websocket-client
+PythonEnv\python.exe -m pip uninstall -y widgetsnbextension
+PythonEnv\python.exe -m pip uninstall -y wslink
+PythonEnv\python.exe -m pip uninstall -y yarl
+PythonEnv\python.exe -m pip uninstall -y pipdeptree
+PythonEnv\python.exe -m pip uninstall -y pip
+PAUSE
+```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會移除許多不必要的套件。
++ **PythonEnv** 資料夾容量約為741[MB]
+
+### 步驟11(不使用互動式Matplotlib的GUI並精簡套件)
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_11(If_Want).bat**
++ 修改其內容為
+```batch
+rem 使用 rd /s /q 刪除資料夾及其所有內容
+rd /s /q "PythonEnv\etc"
+rd /s /q "PythonEnv\Scripts"
+rd /s /q "PythonEnv\share"
+rem 使用 del /f /q 刪除檔案
+del /f /q "PythonEnv\_asyncio.pyd"
+del /f /q "PythonEnv\_bz2.pyd"
+del /f /q "PythonEnv\_hashlib.pyd"
+del /f /q "PythonEnv\_lzma.pyd"
+del /f /q "PythonEnv\_msi.pyd"
+del /f /q "PythonEnv\_multiprocessing.pyd"
+del /f /q "PythonEnv\_overlapped.pyd"
+del /f /q "PythonEnv\_queue.pyd"
+del /f /q "PythonEnv\_sqlite3.pyd"
+del /f /q "PythonEnv\_ssl.pyd"
+del /f /q "PythonEnv\_uuid.pyd"
+del /f /q "PythonEnv\_wmi.pyd"
+del /f /q "PythonEnv\_zoneinfo.pyd"
+del /f /q "PythonEnv\libcrypto-3.dll"
+del /f /q "PythonEnv\libssl-3.dll"
+del /f /q "PythonEnv\python.cat"
+del /f /q "PythonEnv\python3.dll"
+del /f /q "PythonEnv\pythonw.exe"
+del /f /q "PythonEnv\sqlite3.dll"
+del /f /q "PythonEnv\vcruntime140.dll"
+del /f /q "PythonEnv\winsound.pyd"
+rem 使用 rd /s /q 刪除資料夾及其所有內容
+rd /s /q "PythonEnv\Lib\site-packages\trame"
+rd /s /q "PythonEnv\Lib\site-packages\win32comext"
+rem 使用 del /f /q 刪除檔案
+del /f /q "PythonEnv\Lib\site-packages\pylab.py"
+del /f /q "PythonEnv\Lib\site-packages\scipy-1.16.2-cp312-cp312-win_amd64.whl"
+PAUSE
+```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會移除許多不必要的套件。
++ **PythonEnv** 資料夾容量約為741[MB]
