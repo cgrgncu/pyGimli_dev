@@ -292,7 +292,8 @@ PythonEnv\python.exe -m pip install PyQt5
 PAUSE
 ```
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會安裝 **PyQt5** 。
-+ **PythonEnv** 資料夾容量約為741[MB]
++ **PythonEnv** 資料夾容量約為884[MB]
++ 壓縮為 **Full_PyGimli_Env.zip** 容量約為299[MB]
 
 ### 可以正常使用PyGimli
 + 找個範例來跑
@@ -430,7 +431,7 @@ PythonEnv\python.exe -m pip uninstall -y pip
 PAUSE
 ```
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會移除許多不必要的套件。
-+ **PythonEnv** 資料夾容量約為741[MB]
++ **PythonEnv** 資料夾容量約為399[MB]
 
 ### 步驟11(不使用互動式Matplotlib的GUI並精簡套件)
 + 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_11(If_Want).bat**
@@ -471,4 +472,5 @@ del /f /q "PythonEnv\Lib\site-packages\scipy-1.16.2-cp312-cp312-win_amd64.whl"
 PAUSE
 ```
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會移除許多不必要的套件。
-+ **PythonEnv** 資料夾容量約為741[MB]
++ **PythonEnv** 資料夾容量約為389[MB]
++ 壓縮為 **Lite_PyGimli_Env.zip** 容量約為127[MB]
