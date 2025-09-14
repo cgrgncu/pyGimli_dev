@@ -276,3 +276,6 @@ pygimli==1.5.4
     ├── pluggy [required: >=1.5,<2, installed: 1.6.0]
     └── Pygments [required: >=2.7.2, installed: 2.19.2]
 ```
+
+### 可以正常使用PyGimli
++ 找個
