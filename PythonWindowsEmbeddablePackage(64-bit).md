@@ -17,3 +17,10 @@
 + 在根目錄建立 **C:\PyGimli_Embed_Install** 資料夾
 + 在裡面再建立 **C:\PyGimli_Embed_Install\src** 資料夾
 + 下載 **python-3.12.7-embed-amd64.zip** 並移動到 **C:\PyGimli_Embed_Install\src\python-3.12.7-embed-amd64.zip**
+
+### 步驟2
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_01.bat**
++ 修改其內容為
+```batch
+PAUSE
+```
