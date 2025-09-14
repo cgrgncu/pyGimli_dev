@@ -1,6 +1,10 @@
 # PythonWindowsEmbeddablePackage(64-bit)
 + 作者: HsiupoYeh
 + 更新日期: 2025-09-14
++ 目標: 安裝Windows可用的PyGimli
+  + Python版本: 3.12.7
+  + PyGimli版本: 1.5.4
+
 
 ### Python
 + 官方網站:
