@@ -17,6 +17,7 @@
 + 在根目錄建立 **C:\PyGimli_Embed_Install** 資料夾
 + 在裡面再建立 **C:\PyGimli_Embed_Install\src** 資料夾
 + 下載 **python-3.12.7-embed-amd64.zip** 並移動到 **C:\PyGimli_Embed_Install\src\python-3.12.7-embed-amd64.zip**
+  + 已經備份到src資料夾中。
 
 ### 步驟1
 + 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_01.bat**
@@ -42,14 +43,12 @@ PAUSE
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會修改 **PythonEnv\python312._pth** 檔案。
 
 ### 步驟3
++ 下載 https://bootstrap.pypa.io/get-pip.py 並移動到 **C:\PyGimli_Embed_Install\src\get-pip.py**
+  + 已經備份到src資料夾中。
 + 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_03.bat**
 + 修改其內容為
 ```batch
-echo python312.zip > PythonEnv\python312._pth
-echo . >> PythonEnv\python312._pth
-echo. >> PythonEnv\python312._pth
-echo # Uncomment to run site.main() automatically >> PythonEnv\python312._pth
-echo import site >> PythonEnv\python312._pth
+PythonEnv\python.exe src\get-pip.py
 PAUSE
 ```
-+ 然後雙擊運行。正常完成後，按下任意鍵結束。會修改 **PythonEnv\python312._pth** 檔案。
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會安裝pip，然後如果有警告就不要理他。
