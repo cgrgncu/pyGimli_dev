@@ -13,4 +13,7 @@
   + Python 3.12.7 Windows embeddable package (64-bit)
     + https://www.python.org/ftp/python/3.12.7/python-3.12.7-embed-amd64.zip
 
-###
+### 步驟1
++ 在根目錄建立 **C:\PyGimli_Embed_Install** 資料夾
++ 在裡面再建立 **C:\PyGimli_Embed_Install\src** 資料夾
++ 下載 **python-3.12.7-embed-amd64.zip** 並移動到 **C:\PyGimli_Embed_Install\src\python-3.12.7-embed-amd64.zip**
