@@ -277,5 +277,22 @@ pygimli==1.5.4
     └── Pygments [required: >=2.7.2, installed: 2.19.2]
 ```
 
+### 步驟9(想要互動式Matplotlib的GUI才需要)
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_09.bat**
++ 修改其內容為
+```batch
+PythonEnv\python.exe -m pip install PyQt5
+PAUSE
+```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會安裝 **PyQt5** 。
+
 ### 可以正常使用PyGimli
-+ 找個
++ 找個範例來跑
++ 下載 https://www.pygimli.org/_downloads/4ebf8621b32df7e39496a39a44dbf15c/plot_01_ert_2d_mod_inv.py 到 **C:\PyGimli_Embed_Install\plot_01_ert_2d_mod_inv.py**
++ 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\plot_01_ert_2d_mod_inv.bat**
++ 修改其內容為
+```batch
+.\PythonEnv\python.exe plot_01_ert_2d_mod_inv.py
+PAUSE
+```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。有裝PyQt5就會看到一堆互動視窗，沒裝也會看到輸出了一個 **simple.dat** 檔案
