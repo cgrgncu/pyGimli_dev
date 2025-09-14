@@ -13,14 +13,19 @@
   + Python 3.12.7 Windows embeddable package (64-bit)
     + https://www.python.org/ftp/python/3.12.7/python-3.12.7-embed-amd64.zip
 
-### 步驟1
+### 步驟0
 + 在根目錄建立 **C:\PyGimli_Embed_Install** 資料夾
 + 在裡面再建立 **C:\PyGimli_Embed_Install\src** 資料夾
 + 下載 **python-3.12.7-embed-amd64.zip** 並移動到 **C:\PyGimli_Embed_Install\src\python-3.12.7-embed-amd64.zip**
 
-### 步驟2
+### 步驟1
 + 建立一個空白的batch檔案 **C:\PyGimli_Embed_Install\Install_01.bat**
 + 修改其內容為
 ```batch
+mkdir PythonEnv
+tar -xf src/python-3.12.7-embed-amd64.zip -C PythonEnv
 PAUSE
 ```
++ 然後雙擊運行。正常完成後，按下任意鍵結束。會看到許多檔案出現在PythonEnv資料夾中。
+
+### 步驟2
