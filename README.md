@@ -544,3 +544,6 @@ rhomap = [[1, 100.],
 # Take a look at the mesh and the resistivity distribution
 pg.show(mesh, data=rhomap, label=pg.unit('res'), showMesh=True)
 ```
+
++ 順推計算是基於線性的rho作為網格參數。
+  + 參考: pygimli/physics/ert/ert.py
