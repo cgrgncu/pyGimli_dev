@@ -521,3 +521,26 @@ Rücker, C., Günther, T., Wagner, F.M., 2017. pyGIMLi: An open-source library f
 2	38	14	26	0.0510622
 #------------------------------------------------------------
 ```
+
+#### 內部網格元素的儲存方案
++ 每個網格都是填電阻率
+  +  REF:https://www.pygimli.org/_examples_auto/3_ert/plot_01_ert_2d_mod_inv.html 
+```
+for p in scheme.sensors():
+    geom.createNode(p)
+    geom.createNode(p - [0, 0.1])
+
+# Create a mesh for the finite element modelling with appropriate mesh quality.
+mesh = mt.createMesh(geom, quality=34)
+
+# Create a map to set resistivity values in the appropriate regions
+# [[regionNumber, resistivity], [regionNumber, resistivity], [...]
+rhomap = [[1, 100.],
+          [2, 75.],
+          [3, 50.],
+          [4, 150.],
+          [5, 25]]
+
+# Take a look at the mesh and the resistivity distribution
+pg.show(mesh, data=rhomap, label=pg.unit('res'), showMesh=True)
+```
