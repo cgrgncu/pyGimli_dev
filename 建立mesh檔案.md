@@ -160,3 +160,5 @@ showMesh(mesh, markers=True, showMesh=True)
 ```python
 
 ```
+
++ 為了方便統一，建議使用4:3呈現繪圖，推薦尺寸800x600，1024x768。
