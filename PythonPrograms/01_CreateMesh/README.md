@@ -53,6 +53,8 @@ PAUSE
 "OutputFile01_MeshBCMarkersJSON_FileName":"Output/Output_FullMeshBCMarkers.json",
 "OutputFile02_MeshBCMarkersVTK_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile02_MeshBCMarkersVTK_FileName":"Output/Output_FullMesh.vtk",
+"OutputFile03_GEO_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile03_GEO_FileName":"Output/Output_FullMesh.geo",
 "StudyAreaMesh_GridStyle_Readme":"研究區域的網格類型。目前只支援「Rectangle」，就是指以矩形為基礎的網格類型。",
 "StudyAreaMesh_GridStyle":"Rectangle",
 "StudyAreaMesh_RectangleGrid_LayerCount_Readme":"研究區域的網格層數。就是指Z方向的地層數量。此值必須是正整數。",
@@ -227,6 +229,12 @@ temp_filename=temp_json_data["OutputFile02_MeshBCMarkersVTK_FileName"]
 os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
 if os.path.exists(temp_filename): # 檢查檔案是否存在
     os.remove(temp_filename)     # 如果存在，就刪除
+#--
+# OutputFile03_GEO_FileName
+temp_filename=temp_json_data["OutputFile03_GEO_FileName"]
+os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
+if os.path.exists(temp_filename): # 檢查檔案是否存在
+    os.remove(temp_filename)     # 如果存在，就刪除
 #--------------------------------------------
 
 #--------------------------------------------
@@ -240,6 +248,7 @@ NumPy_StudyAreaMesh_GridSurfaceNode_array = np.array(temp_json_data["StudyAreaMe
 # 分離 X 和原始 Z 座標
 NumPy_StudyAreaMesh_x_coords_original = NumPy_StudyAreaMesh_GridSurfaceNode_array[:, 0].astype(float)
 NumPy_StudyAreaMesh_z_coords_original = NumPy_StudyAreaMesh_GridSurfaceNode_array[:, 1].astype(float)
+NumPy_StudyAreaMesh_ElectrodeIndex_original = NumPy_StudyAreaMesh_GridSurfaceNode_array[:, 2].astype(float)
 # 找到非 NaN 值的索引
 NumPy_StudyAreaMesh_non_nan_z_indices = np.where(~np.isnan(NumPy_StudyAreaMesh_z_coords_original))[0]
 # 如果有效的 Z 值不足，視為錯誤並終止程式
@@ -514,7 +523,8 @@ for i in range(mesh.nodeCount()):
 # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
 # 目前是基礎網格 BasicMeshSetTopo
 temp_output_filename=temp_json_data["TempFile11_BasicMeshPNG_FileName"]
-pg.show(mesh,  markers=True, showMesh=True, label="Markers(BasicMeshSetTopo)")
+ax, _ = pg.show(mesh,  markers=True, showMesh=True, label="Markers(BasicMeshSetTopo)")
+ax.plot(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], NumPy_StudyAreaMesh_z_coords_interp[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes (Marker=1)')
 plt.savefig(temp_output_filename)
 plt.close()
 #--------------------------------------------
@@ -576,6 +586,35 @@ print('儲存FullMesh為vtk檔案...')
 temp_output_filename=temp_json_data["OutputFile02_MeshBCMarkersVTK_FileName"]
 mesh.exportVTK(temp_output_filename)
 print('儲存FullMesh為vtk檔案...完成!')
+#--------------------------------------------
+# 輸出GEO檔案
+temp_output_filename=temp_json_data["OutputFile03_GEO_FileName"]
+print('儲存GEO檔案...')
+with open(temp_output_filename, 'w', encoding='utf-8') as f:
+    #--
+    # 前方固定內容
+    f.write('Tx\n')
+    f.write('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64\n')
+    f.write('Rx\n')
+    f.write('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64\n')
+    f.write('RxP2\n')
+    f.write('65\n')
+    f.write('\n')
+    f.write(':Geometry\n')    
+    #--
+    # 替換為電極
+    for i, b in enumerate(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)]):
+        #--
+        line=f"{i+1},{b},0,0\n"
+        # 寫入
+        f.write(line)
+        #--
+    #--
+    # 後方固定內容
+    f.write('\n')
+    f.write(':Measurements\n')
+    #--
+print('儲存GEO檔案...完成!')
 #--------------------------------------------
 print('CreateMesh運作結束!')
 print('--')
