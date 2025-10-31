@@ -778,7 +778,7 @@ print('儲存OHM檔案...')
 with open(temp_output_filename, 'w', encoding='utf-8') as f:
     #--
     # 前方固定內容
-    f.write('#============================================================n')
+    f.write('#============================================================\n')
     f.write('# Data Format: unified data format(*.ohm)\n')
     f.write('# REF: http://resistivity.net/bert/data_format.html\n')
     f.write('# Description: \n')   
