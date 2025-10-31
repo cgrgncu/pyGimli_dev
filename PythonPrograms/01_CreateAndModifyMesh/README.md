@@ -19,7 +19,7 @@
 PAUSE
 ```
 
-### 主程式(ERTMaker_CreateMesh_v20251030a.py)
+### 主程式(ERTMaker_CreateAndModifyMesh_v20251031a.py)
 + 設定檔(CreateMeshSettings.json):
 ```json
 {
@@ -52,11 +52,29 @@ PAUSE
 "TempFile13_BasicMeshVTK_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "TempFile13_BasicMeshVTK_FileName":"Temp/CreateMesh_07_BasicMeshSetTopoRes.vtk",
 "OutputFile01_MeshBCMarkersJSON_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
-"OutputFile01_MeshBCMarkersJSON_FileName":"Output/Output_FullMeshBCMarkers.json",
+"OutputFile01_MeshBCMarkersJSON_FileName":"Output/XP1_SyntheticModelBCMarkers.json",
 "OutputFile02_MeshBCMarkersVTK_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
-"OutputFile02_MeshBCMarkersVTK_FileName":"Output/Output_FullMesh.vtk",
+"OutputFile02_MeshBCMarkersVTK_FileName":"Output/XP1_SyntheticModel.vtk",
 "OutputFile03_GEO_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
-"OutputFile03_GEO_FileName":"Output/Output_FullMesh.geo",
+"OutputFile03_GEO_FileName":"Output/XP1_SyntheticModel.geo",
+"OutputFile04_TRN_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile04_TRN_FileName":"Output/XP1_SyntheticModel.trn",
+"OutputFile05_OHM_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile05_OHM_FileName":"Output/XP1_SyntheticModel.ohm",
+"OutputFile06_BasicMeshPNG_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile06_BasicMeshPNG_FileName":"Output/XP1_SyntheticModel.png",
+"OutputFile06_BasicMeshPNG_DPI_Readme":"圖片輸出的DPI，建議:100。",
+"OutputFile06_BasicMeshPNG_DPI":100,
+"OutputFile06_BasicMeshPNG_Width_Readme":"圖片輸出的寬度，建議:1280。",
+"OutputFile06_BasicMeshPNG_Width":1280,
+"OutputFile06_BasicMeshPNG_Height_Readme":"圖片輸出的寬度，建議:720。",
+"OutputFile06_BasicMeshPNG_Height":720,
+"OutputFile06_BasicMeshPNG_Title_Readme":"圖片的標題。",
+"OutputFile06_BasicMeshPNG_Title":"XP1 Synthetic Model",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMin_Readme":"電阻率色階下限，線性數值，必為正數。建議:1。",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMin":1,
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMax_Readme":"電阻率色階下限，線性數值，必為正數。建議:10000。",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMax":10000,
 "StudyAreaMesh_GridStyle_Readme":"研究區域的網格類型。目前只支援「Rectangle」，就是指以矩形為基礎的網格類型。",
 "StudyAreaMesh_GridStyle":"Rectangle",
 "StudyAreaMesh_RectangleGrid_LayerCount_Readme":"研究區域的網格層數。就是指Z方向的地層數量。此值必須是正整數。",
@@ -68,28 +86,74 @@ PAUSE
 "StudyAreaMesh_GridSurfaceNode_Readme":"逐個點在X方向上應為遞增的數字，不可填入null；在Z方向上填入對應高程，允許部分缺值(填入null)，將進行內插；Electrode_Index從1開始依序增加。若設為0或負值表示該位置不設置電極",
 "StudyAreaMesh_GridSurfaceNode_Readme2":"X[m],Z[m],Electrode_Index",
 "StudyAreaMesh_GridSurfaceNode":[
-[-10,0,0],
-[-9,0,0],
-[-8,0,0],
-[-7,0,0],
-[-6,0,1],
-[-5,1,0],
-[-4,0,2],
-[-3,3,0],
-[-2,2,3],
-[-1,null,0],
-[0,0,4],
-[1,0,0],
-[2,0,5],
-[3,0,0],
-[4,0,6],
-[5,0,0],
-[6,0,7],
-[7,0,8],
-[8,0,9],
-[9,0,10],
-[10,0,11],
-[11,0,0]
+[0,813.007,1],
+[1,813.066,2],
+[2,813.068,3],
+[3,813.185,4],
+[4,812.873,5],
+[5,813.145,6],
+[6,813.649,7],
+[7,813.882,8],
+[8,813.713,9],
+[9,813.868,10],
+[10,814.04,11],
+[11,814.393,12],
+[12,814.382,13],
+[13,814.489,14],
+[14,814.349,15],
+[15,814.126,16],
+[16,814.035,17],
+[17,813.696,18],
+[18,813.977,19],
+[19,814.02,20],
+[20,813.968,21],
+[21,813.98,22],
+[22,814.006,23],
+[23,814.344,24],
+[24,814.124,25],
+[25,814.28,26],
+[26,814.222,27],
+[27,814.09,28],
+[28,813.919,29],
+[29,813.723,30],
+[30,813.634,31],
+[31,813.444,32],
+[32,813.197,33],
+[33,813.406,34],
+[34,813.3,35],
+[35,813.211,36],
+[36,813.197,37],
+[37,812.852,38],
+[38,812.893,39],
+[39,812.5795,40],
+[40,812.266,41],
+[41,812.3885,42],
+[42,812.511,43],
+[43,812.451,44],
+[44,812.158,45],
+[45,812.278,46],
+[46,812.203,47],
+[47,812.181,48],
+[48,812.99,49],
+[49,813.05,50],
+[50,814.5972,51],
+[51,null,0],
+[52,null,0],
+[53,null,0],
+[54,817.008,52],
+[55,816.981,53],
+[56,816.385,54],
+[57,816.409,55],
+[58,816.421,56],
+[59,817.016,57],
+[60,817.308,58],
+[61,818.08,59],
+[62,818.571,60],
+[63,819.079,61],
+[64,819.638,62],
+[65,820.346,63],
+[66,821.833,64],
+[67,822.459,65]
 ],
 "PaddingMesh_GridStyle_Readme":"附加區域的網格類型。目前只支援「Rectangle」，就是指以矩形為基礎的網格類型。",
 "PaddingMesh_GridStyle":"Rectangle",
@@ -115,7 +179,8 @@ PAUSE
 "ModifyMeshResistivity_Readme2":"x_min[m],x_max[m],z_min[m],z_max[m],New_Resistivity[ohm-m]",
 "ModifyMeshResistivity":[
 [-9999, 9999, -9999, 9999, 100],
-[-9999, 9999, -10, -5, 10]
+[15, 25, 795, 805, 10],
+[50, 60, 795, 805, 3000]
 ]
 }
 ```
@@ -128,7 +193,7 @@ PAUSE
 #   Version: v20251031a
 #   Description: 讀取 JSON 設定檔，建立電極與包含邊界填充區域的二維地形網格，
 #                並設定單元 (Cell) 和邊界 (Boundary) Marker，輸出為
-#                PNG, VTK, JSON, GEO, TRN 檔案。
+#                PNG, VTK, JSON, GEO, TRN, OHM 檔案。
 #                必須讀取指定位置「Input_ERTMaker_CreateAndModifyMesh/CreateAndModifyMeshSettings.json」的JOSN檔案。
 #                設定檔(CreateAndModifyMeshSettings.json)中有說明各參數意義。
 #**************************************************************************
@@ -260,8 +325,13 @@ os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
 if os.path.exists(temp_filename): # 檢查檔案是否存在
     os.remove(temp_filename)     # 如果存在，就刪除
 #--
-# OutputFile05_BasicMeshPNG_FileName
-temp_filename=temp_json_data["OutputFile05_BasicMeshPNG_FileName"]
+# OutputFile05_OHM_FileName
+temp_filename=temp_json_data["OutputFile05_OHM_FileName"]
+os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
+if os.path.exists(temp_filename): # 檢查檔案是否存在
+    os.remove(temp_filename)     # 如果存在，就刪除
+# OutputFile06_BasicMeshPNG_FileName
+temp_filename=temp_json_data["OutputFile06_BasicMeshPNG_FileName"]
 os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
 if os.path.exists(temp_filename): # 檢查檔案是否存在
     os.remove(temp_filename)     # 如果存在，就刪除
@@ -702,16 +772,70 @@ with open(temp_output_filename, 'w', encoding='utf-8') as f:
     #--
 print('儲存TRN檔案...完成!')
 #--------------------------------------------
+# 輸出OHM檔案
+temp_output_filename=temp_json_data["OutputFile05_OHM_FileName"]
+print('儲存OHM檔案...')
+with open(temp_output_filename, 'w', encoding='utf-8') as f:
+    #--
+    # 前方固定內容
+    f.write('#============================================================n')
+    f.write('# Data Format: unified data format(*.ohm)\n')
+    f.write('# REF: http://resistivity.net/bert/data_format.html\n')
+    f.write('# Description: \n')   
+    f.write('#     pyGIMLI 2D ERT OHM Data\n')   
+    f.write('# 注意事項:\n')   
+    f.write('#   HsiupoYeh 2024-04-29整理，適用pyGIMLI v.1.5.4\n')   
+    f.write('#   電極資料從編號1開始到電極數量。例如:電極數量為38，編號為1~38。\n')   
+    f.write('#   編號0表示位置無限遠，留給特殊陣列使用。\n')   
+    f.write('#   所有資料可以用空白或tab分隔。\n')   
+    f.write('#   註解用「#」\n')   
+    f.write('#============================================================\n')   
+    f.write('\n')   
+    f.write('#------------------------------------------------------------\n')
+    f.write('# 在2D的情況下，電極定義為「#x z」。\n')   
+    f.write('# x 單位公尺，側向位置向右為正。\n')
+    f.write('# z 單位公尺，高程向上為正。\n')   
+    f.write('# 注意: 讀檔程式不聰明，電極數量寫在本區塊某一行，其下一行必須是「#x z」。\n')
+    f.write('#       這個「#x z」不是註解，讀檔要解析...\n')   
+    f.write('#--\n')
+    f.write('# 電極數量:\n')   
+    f.write(f"{len(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)])}\n")
+    f.write('#x z\n')   
+    #--
+    # 替換為網格節點高程
+    for i, (val_A, val_B) in enumerate(zip(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], NumPy_StudyAreaMesh_z_coords_interp[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)])):
+        #--
+        line=f"{val_A} {val_B}\n"
+        # 寫入
+        f.write(line)
+        #--
+    #--
+    # 後方固定內容
+    f.write('#------------------------------------------------------------\n')
+    f.write('\n')
+    f.write('#------------------------------------------------------------\n')
+    f.write('# 注意: 讀檔程式不聰明，觀測資料數量寫在本區塊某一行，其下一行必須是「#A B M N R」。\n')
+    f.write('#       這個「#A B M N R」不是註解，讀檔要解析...\n')
+    f.write('#       A,B,M,N均為電極編號，以上方區塊電極位置的順序當作編號，第一個電極為編號1。\n')
+    f.write('#       R為AB電流與MN電壓比值(V_MN/I_AB)，單位「Ohm」。\n')
+    f.write('# 觀測資料數量:\n')
+    f.write('1\n')
+    f.write('#A B M N R\n')
+    f.write('1 4 2 3 100\n')
+    f.write('#------------------------------------------------------------\n')
+    #--
+print('儲存OHM檔案...完成!')
+#--------------------------------------------
 # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
 # 目前是基礎網格 BasicMeshSetTopoRes
-temp_output_filename=temp_json_data["OutputFile05_BasicMeshPNG_FileName"]
-temp_PNG_DPI=temp_json_data["OutputFile05_BasicMeshPNG_DPI"]
-temp_PNG_Width=temp_json_data["OutputFile05_BasicMeshPNG_Width"]
-temp_PNG_Height=temp_json_data["OutputFile05_BasicMeshPNG_Height"]
-temp_PNG_Title=temp_json_data["OutputFile05_BasicMeshPNG_Title"]
-temp_PNG_Title=temp_json_data["OutputFile05_BasicMeshPNG_Title"]
-temp_PNG_ColorBarResistivityMin=temp_json_data["OutputFile05_BasicMeshPNG_ColorBarResistivityMin"]
-temp_PNG_ColorBarResistivityMax=temp_json_data["OutputFile05_BasicMeshPNG_ColorBarResistivityMax"]
+temp_output_filename=temp_json_data["OutputFile06_BasicMeshPNG_FileName"]
+temp_PNG_DPI=temp_json_data["OutputFile06_BasicMeshPNG_DPI"]
+temp_PNG_Width=temp_json_data["OutputFile06_BasicMeshPNG_Width"]
+temp_PNG_Height=temp_json_data["OutputFile06_BasicMeshPNG_Height"]
+temp_PNG_Title=temp_json_data["OutputFile06_BasicMeshPNG_Title"]
+temp_PNG_Title=temp_json_data["OutputFile06_BasicMeshPNG_Title"]
+temp_PNG_ColorBarResistivityMin=temp_json_data["OutputFile06_BasicMeshPNG_ColorBarResistivityMin"]
+temp_PNG_ColorBarResistivityMax=temp_json_data["OutputFile06_BasicMeshPNG_ColorBarResistivityMax"]
 print('儲存PNG檔案...')
 ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
     markers=False,
@@ -742,6 +866,7 @@ plt.savefig(temp_output_filename)
 plt.close()
 print('儲存PNG檔案...完成!')
 #--------------------------------------------
+
 print('ERTMaker_CreateAndModifyMesh運作結束!')
 print('--')
 #--------------------------------------------
@@ -787,20 +912,22 @@ print('--')
 "OutputFile03_GEO_FileName":"Output/XP1_SyntheticModel.geo",
 "OutputFile04_TRN_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile04_TRN_FileName":"Output/XP1_SyntheticModel.trn",
-"OutputFile05_BasicMeshPNG_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
-"OutputFile05_BasicMeshPNG_FileName":"Output/XP1_SyntheticModel.png",
-"OutputFile05_BasicMeshPNG_DPI_Readme":"圖片輸出的DPI，建議:100。",
-"OutputFile05_BasicMeshPNG_DPI":100,
-"OutputFile05_BasicMeshPNG_Width_Readme":"圖片輸出的寬度，建議:1280。",
-"OutputFile05_BasicMeshPNG_Width":1280,
-"OutputFile05_BasicMeshPNG_Height_Readme":"圖片輸出的寬度，建議:720。",
-"OutputFile05_BasicMeshPNG_Height":720,
-"OutputFile05_BasicMeshPNG_Title_Readme":"圖片的標題。",
-"OutputFile05_BasicMeshPNG_Title":"XP1 Synthetic Model",
-"OutputFile05_BasicMeshPNG_ColorBarResistivityMin_Readme":"電阻率色階下限，線性數值，必為正數。建議:1。",
-"OutputFile05_BasicMeshPNG_ColorBarResistivityMin":1,
-"OutputFile05_BasicMeshPNG_ColorBarResistivityMax_Readme":"電阻率色階下限，線性數值，必為正數。建議:10000。",
-"OutputFile05_BasicMeshPNG_ColorBarResistivityMax":10000,
+"OutputFile05_OHM_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile05_OHM_FileName":"Output/XP1_SyntheticModel.ohm",
+"OutputFile06_BasicMeshPNG_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
+"OutputFile06_BasicMeshPNG_FileName":"Output/XP1_SyntheticModel.png",
+"OutputFile06_BasicMeshPNG_DPI_Readme":"圖片輸出的DPI，建議:100。",
+"OutputFile06_BasicMeshPNG_DPI":100,
+"OutputFile06_BasicMeshPNG_Width_Readme":"圖片輸出的寬度，建議:1280。",
+"OutputFile06_BasicMeshPNG_Width":1280,
+"OutputFile06_BasicMeshPNG_Height_Readme":"圖片輸出的寬度，建議:720。",
+"OutputFile06_BasicMeshPNG_Height":720,
+"OutputFile06_BasicMeshPNG_Title_Readme":"圖片的標題。",
+"OutputFile06_BasicMeshPNG_Title":"XP1 Synthetic Model",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMin_Readme":"電阻率色階下限，線性數值，必為正數。建議:1。",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMin":1,
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMax_Readme":"電阻率色階下限，線性數值，必為正數。建議:10000。",
+"OutputFile06_BasicMeshPNG_ColorBarResistivityMax":10000,
 "StudyAreaMesh_GridStyle_Readme":"研究區域的網格類型。目前只支援「Rectangle」，就是指以矩形為基礎的網格類型。",
 "StudyAreaMesh_GridStyle":"Rectangle",
 "StudyAreaMesh_RectangleGrid_LayerCount_Readme":"研究區域的網格層數。就是指Z方向的地層數量。此值必須是正整數。",
