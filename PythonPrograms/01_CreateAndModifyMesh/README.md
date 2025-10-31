@@ -581,8 +581,6 @@ plt.close()
 # 輸出VTK
 # 目前是基礎網格 BasicMeshSetTopo 。
 # 輸出VTK前先把預設該存在的資料填1
-mesh['Resistivity'] = np.ones(mesh.cellCount())
-mesh['Resistivity_(log10)'] = np.log10(mesh['Resistivity'])
 mesh['Coverage'] = np.ones(mesh.cellCount())
 mesh['S_Coverage'] = np.ones(mesh.cellCount())
 # 輸出
@@ -626,8 +624,6 @@ with open(temp_output_filename, 'w', encoding='utf-8') as f:
 print('儲存MeshBCMarkers為JSON檔案...完成!')
 #--------------------------------------------
 # 先把預設該存在的資料填1
-mesh['Resistivity'] = np.ones(mesh.cellCount())
-mesh['Resistivity_(log10)'] = np.log10(mesh['Resistivity'])
 mesh['Coverage'] = np.ones(mesh.cellCount())
 mesh['S_Coverage'] = np.ones(mesh.cellCount())
 #-- 
