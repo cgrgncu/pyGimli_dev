@@ -126,9 +126,9 @@ PAUSE
 #   Copyright: 
 #   Author: HsiupoYeh
 #   Version: v20251031a
-#   Description: 讀取 JSON 設定檔，建立包含邊界填充區域的二維地形網格，
+#   Description: 讀取 JSON 設定檔，建立電極與包含邊界填充區域的二維地形網格，
 #                並設定單元 (Cell) 和邊界 (Boundary) Marker，輸出為
-#                PNG, VTK 和 JSON 檔案。
+#                PNG, VTK, JSON, GEO, TRN 檔案。
 #                必須讀取指定位置「Input_ERTMaker_CreateAndModifyMesh/CreateAndModifyMeshSettings.json」的JOSN檔案。
 #                設定檔(CreateAndModifyMeshSettings.json)中有說明各參數意義。
 #**************************************************************************
@@ -141,6 +141,10 @@ import matplotlib.pyplot as plt
 #--------------------------------------------
 print('--')
 print('ERTMaker_CreateAndModifyMesh運作開始!')
+#--------------------------------------------
+# 軟體說明
+ERTMaker_Info = f'ERTMaker v1.0(Author: HsiupoYeh) Powered by PyGIMLi v{pg.__version__}'
+print(ERTMaker_Info)
 #--------------------------------------------
 # 指定檔案名稱
 json_file_name = 'Input_ERTMaker_CreateAndModifyMesh/CreateAndModifyMeshSettings.json'
@@ -246,6 +250,18 @@ if os.path.exists(temp_filename): # 檢查檔案是否存在
 #--
 # OutputFile03_GEO_FileName
 temp_filename=temp_json_data["OutputFile03_GEO_FileName"]
+os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
+if os.path.exists(temp_filename): # 檢查檔案是否存在
+    os.remove(temp_filename)     # 如果存在，就刪除
+#--
+# OutputFile04_TRN_FileName
+temp_filename=temp_json_data["OutputFile04_TRN_FileName"]
+os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
+if os.path.exists(temp_filename): # 檢查檔案是否存在
+    os.remove(temp_filename)     # 如果存在，就刪除
+#--
+# OutputFile05_BasicMeshPNG_FileName
+temp_filename=temp_json_data["OutputFile05_BasicMeshPNG_FileName"]
 os.makedirs(os.path.dirname(temp_filename), exist_ok=True)
 if os.path.exists(temp_filename): # 檢查檔案是否存在
     os.remove(temp_filename)     # 如果存在，就刪除
@@ -663,7 +679,70 @@ with open(temp_output_filename, 'w', encoding='utf-8') as f:
     #--
 print('儲存GEO檔案...完成!')
 #--------------------------------------------
-print('CreateAndModifyMesh運作結束!')
+# 輸出TRN檔案
+temp_output_filename=temp_json_data["OutputFile04_TRN_FileName"]
+print('儲存TRN檔案...')
+with open(temp_output_filename, 'w', encoding='utf-8') as f:
+    #--
+    # 前方固定內容
+    f.write('; TRN File\n')
+    f.write('unit=meters\n')
+    f.write('1\n')
+    #--
+    # 替換為網格節點高程
+    for i, (val_A, val_B) in enumerate(zip(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], NumPy_StudyAreaMesh_z_coords_interp[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)])):
+        #--
+        line=f"{val_A},{val_B}\n"
+        # 寫入
+        f.write(line)
+        #--
+    #--
+    # 後方固定內容
+    f.write('\n')
+    #--
+print('儲存TRN檔案...完成!')
+#--------------------------------------------
+# 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
+# 目前是基礎網格 BasicMeshSetTopoRes
+temp_output_filename=temp_json_data["OutputFile05_BasicMeshPNG_FileName"]
+temp_PNG_DPI=temp_json_data["OutputFile05_BasicMeshPNG_DPI"]
+temp_PNG_Width=temp_json_data["OutputFile05_BasicMeshPNG_Width"]
+temp_PNG_Height=temp_json_data["OutputFile05_BasicMeshPNG_Height"]
+temp_PNG_Title=temp_json_data["OutputFile05_BasicMeshPNG_Title"]
+temp_PNG_Title=temp_json_data["OutputFile05_BasicMeshPNG_Title"]
+temp_PNG_ColorBarResistivityMin=temp_json_data["OutputFile05_BasicMeshPNG_ColorBarResistivityMin"]
+temp_PNG_ColorBarResistivityMax=temp_json_data["OutputFile05_BasicMeshPNG_ColorBarResistivityMax"]
+print('儲存PNG檔案...')
+ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
+    markers=False,
+    showMesh=True,
+    cMap='jet', 
+    cMin=np.log10(temp_PNG_ColorBarResistivityMin),
+    cMax=np.log10(temp_PNG_ColorBarResistivityMax),
+    label="Resistivity(log10)",
+    figsize=(temp_PNG_Width / temp_PNG_DPI, temp_PNG_Height / temp_PNG_DPI), 
+    dpi=temp_PNG_DPI)
+ax.plot(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], NumPy_StudyAreaMesh_z_coords_interp[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
+ax.set_title(f'{temp_PNG_Title}' ,pad=15)  
+ax.set_xlabel('Distance (m)')
+ax.set_ylabel('Elevation (m)')
+ax.legend()
+ax.figure.text(0.98, 0.01, ERTMaker_Info, 
+          ha='right', va='bottom', fontsize=8, color='gray')
+
+# 調整邊界
+x_min, x_max = ax.get_xlim()
+y_min, y_max = ax.get_ylim()
+x_range = x_max - x_min
+y_range = y_max - y_min
+ax.set_ylim(y_min , y_max + 0.1 * y_range)
+#--
+plt.tight_layout() 
+plt.savefig(temp_output_filename)
+plt.close()
+print('儲存PNG檔案...完成!')
+#--------------------------------------------
+print('ERTMaker_CreateAndModifyMesh運作結束!')
 print('--')
 #--------------------------------------------
 ```
