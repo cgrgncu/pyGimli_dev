@@ -21,6 +21,7 @@ PAUSE
 
 ### 主程式(ERTMaker_CreateMesh_v20251030a.py)
 + 設定檔(CreateMeshSettings.json):
+```json
 {
 "CreateAndModifyMeshSettings_Version":"v20251030a",
 "CreateAndModifyMeshSettings_Author":"HsiupoYeh",
@@ -124,7 +125,7 @@ PAUSE
 #   Name: ERTMaker_CreateAndModifyMesh.py
 #   Copyright: 
 #   Author: HsiupoYeh
-#   Version: v20251030a
+#   Version: v20251031a
 #   Description: 讀取 JSON 設定檔，建立包含邊界填充區域的二維地形網格，
 #                並設定單元 (Cell) 和邊界 (Boundary) Marker，輸出為
 #                PNG, VTK 和 JSON 檔案。
