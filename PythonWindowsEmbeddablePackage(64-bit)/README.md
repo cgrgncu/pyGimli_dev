@@ -474,3 +474,6 @@ PAUSE
 + 然後雙擊運行。正常完成後，按下任意鍵結束。會移除許多不必要的套件。
 + **PythonEnv** 資料夾容量約為389[MB]
 + 壓縮為 **Lite_PyGimli_Env.zip** 容量約為127[MB]
+
+
++ 注意: 如果沒有安裝，可能需要放置vcruntime140.dll與vcruntime140_1.dll到Python.exe同層目錄下
