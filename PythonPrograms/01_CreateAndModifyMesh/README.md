@@ -18,6 +18,11 @@
 .\PythonEnv\Python.exe ERTMaker_CreateAndModifyMesh_v20251031a.py
 PAUSE
 ```
++ 編譯方式: 運行「COMPILE_ERTMaker_CreateAndModifyMesh_v20251031a.bat」檔案，檔案內容:
+```batch
+.\PythonEnv\Python.exe -m py_compile ERTMaker_CreateAndModifyMesh_v20251031a.py
+PAUSE
+```
 
 ### 主程式(ERTMaker_CreateAndModifyMesh_v20251031a.py)
 + 設定檔(CreateMeshSettings.json):
