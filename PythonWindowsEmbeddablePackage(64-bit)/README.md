@@ -2,7 +2,7 @@
 + 作者: HsiupoYeh
 + 更新日期: 2025-09-14
 + 目標: 安裝Windows可用的PyGimli
-  + Python版本: 3.12.7
+  + Python版本: 3.12.7 (64-bit)
   + PyGimli版本: 1.5.4
 
 
