@@ -23,7 +23,7 @@ PAUSE
 + 設定檔(CreateMeshSettings.json):
 ```json
 {
-"CreateAndModifyMeshSettings_Version":"v20251030a",
+"CreateAndModifyMeshSettings_Version":"v20251031a",
 "CreateAndModifyMeshSettings_Author":"HsiupoYeh",
 "TempFile01_BasicMeshPNG_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "TempFile01_BasicMeshPNG_FileName":"Temp/CreateMesh_01_BasicMesh.png",
@@ -876,7 +876,7 @@ print('--')
 + XP1
 ```json
 {
-"CreateAndModifyMeshSettings_Version":"v20251030a",
+"CreateAndModifyMeshSettings_Version":"v20251031a",
 "CreateAndModifyMeshSettings_Author":"HsiupoYeh",
 "TempFile01_BasicMeshPNG_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "TempFile01_BasicMeshPNG_FileName":"Temp/CreateMesh_01_BasicMesh.png",
