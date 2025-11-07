@@ -37,7 +37,7 @@ PAUSE
 + 設定檔(CreateMeshSettings.json):
 ```json
 {
-"SimulateForTimeSeriesSettings_Version":"v20251030a",
+"SimulateForTimeSeriesSettings_Version":"v20251031a",
 "SimulateForTimeSeriesSettings_Author":"HsiupoYeh",
 "InputFile01_MeshVTK_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "InputFile01_MeshVTK_FileName":"Input_ERTMaker_SimulateForTimeSeries/XP1_SyntheticModel.vtk",
