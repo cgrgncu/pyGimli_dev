@@ -4,7 +4,7 @@
 
 ### 版本
 + RUN_ERTMaker_SimulateForTimeSeries_v20251031a.py
-  + 單執行緒，重複使用繪圖似乎記憶體控管很差。
+  + 單執行緒，重複使用繪圖似乎記憶體控管很差。建議關閉繪圖。但只會關閉電流圖。
 
 ### 開發環境
 + Windows 10
@@ -61,8 +61,10 @@ PAUSE
 "MeshPNG_ColorBarResistivityMax":10000,
 "OutputFolderPath_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。務必要使用「/」在結尾，表示資料夾。",
 "OutputFolderPath":"Output_ERTMaker_SimulateForTimeSeries/",
-"OutputPNG_MainFileName_Readme":"會產生很多張圖，這些圖的主要檔名。",
-"OutputPNG_MainFileName":"XP1_SyntheticModel",
+"Output_MainFileName_Readme":"會產生很多檔案，這些檔案的主要檔名。",
+"Output_MainFileName":"XP1_SyntheticModel",
+"Output_PNG_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時",
+"Output_PNG_Enable":"Yes",
 "ElectrodeIndexAB_TxVoltageMax_Readme":"AB電極的發射器最大電壓，單位[V]",
 "ElectrodeIndexAB_TxVoltageMax":400,
 "ElectrodeIndexAB_TxCurrentMax_Readme":"AB電極的發射器最大電流，單位[A]",
@@ -85,6 +87,7 @@ PAUSE
 #                設定檔(CreateAndModifyMeshSettings.json)中有說明各參數意義。
 #**************************************************************************
 import json
+import time
 import os
 import shutil
 import numpy as np
@@ -93,6 +96,10 @@ import pygimli as pg
 import matplotlib.pyplot as plt
 from pygimli.physics import ert
 from pygimli.viewer.mpl import drawStreams
+#--------------------------------------------
+# 程式開始計時
+# 使用 time.perf_counter() 進行高精度計時
+SCRIPT_START_TIME = time.perf_counter()
 #--------------------------------------------
 print('--')
 print('ERTMaker_SimulateForTimeSeries運作開始!')
@@ -155,12 +162,50 @@ print("載入OHM檔案...完成!")
 # 展示並確認資料內容:
 print('觀測資料(ohm檔案)資訊:')
 print(data)
-ABMN_count=data.size()
-print('檢查ABMN數量...')
-if ABMN_count>1000 :
-    print('錯誤!觀測資料數量超過指定最大處理數量(ABMN_count > 1000)')
-    exit(1)
-print('檢查ABMN數量...完成!')
+#--------------------------------------------
+# 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
+# 目前是基礎網格 BasicMeshSetTopoRes
+temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}.png')
+temp_PNG_DPI=temp_json_data["MeshPNG_DPI"]
+temp_PNG_Width=temp_json_data["MeshPNG_Width"]
+temp_PNG_Height=temp_json_data["MeshPNG_Height"]
+temp_PNG_Title=temp_json_data["MeshPNG_Title"]
+temp_PNG_ColorBarResistivityMin=temp_json_data["MeshPNG_ColorBarResistivityMin"]
+temp_PNG_ColorBarResistivityMax=temp_json_data["MeshPNG_ColorBarResistivityMax"]
+electrodes_position_array = data.sensors().array()
+electrodes_position_x_values = electrodes_position_array[:, 0]
+electrodes_position_y_values = electrodes_position_array[:, 1]
+electrodes_position_z_values = electrodes_position_array[:, 2]
+print('儲存PNG檔案...')
+ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
+    markers=False,
+    showMesh=True,
+    cMap='jet', 
+    cMin=np.log10(temp_PNG_ColorBarResistivityMin),
+    cMax=np.log10(temp_PNG_ColorBarResistivityMax),
+    label="Resistivity(log10)",
+    figsize=(temp_PNG_Width / temp_PNG_DPI, temp_PNG_Height / temp_PNG_DPI), 
+    dpi=temp_PNG_DPI)
+ax.plot(electrodes_position_x_values, electrodes_position_z_values, 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
+ax.set_title(f'{temp_PNG_Title}' ,pad=15)  
+ax.set_xlabel('Distance (m)')
+ax.set_ylabel('Elevation (m)')
+ax.legend()
+ax.figure.text(0.98, 0.01, ERTMaker_Info, 
+          ha='right', va='bottom', fontsize=8, color='gray')
+
+# 調整邊界
+x_min, x_max = ax.get_xlim()
+y_min, y_max = ax.get_ylim()
+x_range = x_max - x_min
+y_range = y_max - y_min
+ax.set_ylim(y_min , y_max + 0.1 * y_range)
+#--
+plt.tight_layout() 
+plt.savefig(temp_output_filename)
+plt.close()
+print('儲存PNG檔案...完成!')
+#-------------------------------------------- 
 #--------------------------------------------
 # 讀取Current Mode檔案
 print("載入CurrentMode檔案...")
@@ -237,55 +282,7 @@ for i_ab_idx, ab in enumerate(ab_array):
     pointB = [sensor_positions[ab[1]][0],sensor_positions[ab[1]][2]]
     pointRef = [sensor_positions[-1][0],sensor_positions[-1][2]]
     #--
-    print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，A注入B回收的電位分布圖...')    
-    #--------------------------------------------
-    # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
-    # 目前是 CurrentFlowLines AB
-    temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["OutputPNG_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.png')
-    ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
-        markers=False,
-        showMesh=True,
-        cMap='jet', 
-        cMin=np.log10(temp_json_data['MeshPNG_ColorBarResistivityMin']),
-        cMax=np.log10(temp_json_data['MeshPNG_ColorBarResistivityMax']),
-        label="Resistivity(log10)(Ohm-m)",
-        figsize=(temp_json_data['MeshPNG_Width'] / temp_json_data['MeshPNG_DPI'], temp_json_data['MeshPNG_Height'] / temp_json_data['MeshPNG_DPI']), 
-        dpi=temp_json_data['MeshPNG_DPI'])
-    #--
-    # 電流方向與電場梯度相反，提供負的電場梯度
     potential = electric_potential[ab[0]]-electric_potential[ab[1]]
-    neg_potential = -potential
-    drawStreams(
-        ax,
-        mesh,
-        neg_potential,
-        coarseMesh=mesh,
-        color='Black'
-    )
-    #--
-    # 繪製所有感應器位置
-    ax.plot(
-        pg.x(sensor_positions),
-        pg.z(sensor_positions), 
-        marker="o", 
-        linestyle='None', 
-        fillstyle='none', 
-        color='magenta', 
-        markersize=6,
-        label='Electrode Nodes')
-    # 繪製並標註點 A
-    ax.plot(pointA[0], pointA[1], marker=".", color='red', ms=10)
-    ax.annotate('A', xy=pointA, ha="center", fontsize=10,
-                bbox=dict(boxstyle="round", fc=(0.8, 0.8, 0.8), ec='red'),
-                xytext=(0, 20), textcoords='offset points',
-                arrowprops=dict(arrowstyle="wedge, tail_width=.5", fc='red', ec='red', patchA=None, alpha=0.75))
-    #--
-    # 繪製並標註點 B
-    ax.plot(pointB[0], pointB[1], marker=".", color='red', ms=10)
-    ax.annotate('B', xy=pointB, ha="center", fontsize=10,
-                bbox=dict(boxstyle="round", fc=(0.8, 0.8, 0.8), ec='red'),
-                xytext=(0, 20), textcoords='offset points',
-                arrowprops=dict(arrowstyle="wedge, tail_width=.5", fc='red', ec='red', patchA=None, alpha=0.75))
     #--
     R_AB = temp_json_data['ElectrodeIndexAB_Resistance'] 
     # 計算理論電流
@@ -294,29 +291,80 @@ for i_ab_idx, ab in enumerate(ab_array):
     I_out = np.minimum(temp_json_data['ElectrodeIndexAB_TxCurrentMax'], I_theory)    
     # 實際輸出電壓 V_out
     V_out = I_out * R_AB  
-    ax.set_title(f'CurrentFlowLines Map ElectrodePair(AB)#{i_ab_idx+1}/{len(ab_array[:,1])}:\n A=({pointA[0]:.2f},{pointA[1]:.2f}) B=({pointB[0]:.2f},{pointB[1]:.2f}) Tx={V_out}[V]/{I_out}[A] AB_Resistance={R_AB}[Ohm]',pad=15)  
     #--
-    ax.set_xlabel('Distance (m)')
-    ax.set_ylabel('Elevation (m)')
-    ax.legend()
-    ax.figure.text(0.98, 0.01, ERTMaker_Info, ha='right', va='bottom', fontsize=8, color='gray')
-    #--
-    # 調整邊界
-    x_min, x_max = ax.get_xlim()
-    y_min, y_max = ax.get_ylim()
-    x_range = x_max - x_min
-    y_range = y_max - y_min
-    ax.set_ylim(y_min , y_max + 0.1 * y_range)
-    # 存圖
-    plt.tight_layout() 
-    plt.savefig(temp_output_filename)
-    plt.close()
-    #--
-    print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，A注入B回收的電位分布圖的電流方向圖...繪製完成!')
+    if temp_json_data['Output_PNG_Enable'] == 'Yes' :
+        print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，A注入B回收的電位分布圖...')    
+        #--------------------------------------------
+        # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
+        # 目前是 CurrentFlowLines AB
+        temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["OutputPNG_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.png')
+        ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
+            markers=False,
+            showMesh=True,
+            cMap='jet', 
+            cMin=np.log10(temp_json_data['MeshPNG_ColorBarResistivityMin']),
+            cMax=np.log10(temp_json_data['MeshPNG_ColorBarResistivityMax']),
+            label="Resistivity(log10)(Ohm-m)",
+            figsize=(temp_json_data['MeshPNG_Width'] / temp_json_data['MeshPNG_DPI'], temp_json_data['MeshPNG_Height'] / temp_json_data['MeshPNG_DPI']), 
+            dpi=temp_json_data['MeshPNG_DPI'])
+        #--
+        # 電流方向與電場梯度相反，提供負的電場梯度
+        neg_potential = -potential
+        drawStreams(
+            ax,
+            mesh,
+            neg_potential,
+            coarseMesh=mesh,
+            color='Black'
+        )
+        #--
+        # 繪製所有感應器位置
+        ax.plot(
+            pg.x(sensor_positions),
+            pg.z(sensor_positions), 
+            marker="o", 
+            linestyle='None', 
+            fillstyle='none', 
+            color='magenta', 
+            markersize=6,
+            label='Electrode Nodes')
+        # 繪製並標註點 A
+        ax.plot(pointA[0], pointA[1], marker=".", color='red', ms=10)
+        ax.annotate('A', xy=pointA, ha="center", fontsize=10,
+                    bbox=dict(boxstyle="round", fc=(0.8, 0.8, 0.8), ec='red'),
+                    xytext=(0, 20), textcoords='offset points',
+                    arrowprops=dict(arrowstyle="wedge, tail_width=.5", fc='red', ec='red', patchA=None, alpha=0.75))
+        #--
+        # 繪製並標註點 B
+        ax.plot(pointB[0], pointB[1], marker=".", color='red', ms=10)
+        ax.annotate('B', xy=pointB, ha="center", fontsize=10,
+                    bbox=dict(boxstyle="round", fc=(0.8, 0.8, 0.8), ec='red'),
+                    xytext=(0, 20), textcoords='offset points',
+                    arrowprops=dict(arrowstyle="wedge, tail_width=.5", fc='red', ec='red', patchA=None, alpha=0.75))
+        #--    
+        ax.set_title(f'CurrentFlowLines Map ElectrodePair(AB)#{i_ab_idx+1}/{len(ab_array[:,1])}:\n A=({pointA[0]:.2f},{pointA[1]:.2f}) B=({pointB[0]:.2f},{pointB[1]:.2f}) Tx={V_out}[V]/{I_out}[A] AB_Resistance={R_AB}[Ohm]',pad=15)  
+        #--
+        ax.set_xlabel('Distance (m)')
+        ax.set_ylabel('Elevation (m)')
+        ax.legend()
+        ax.figure.text(0.98, 0.01, ERTMaker_Info, ha='right', va='bottom', fontsize=8, color='gray')
+        #--
+        # 調整邊界
+        x_min, x_max = ax.get_xlim()
+        y_min, y_max = ax.get_ylim()
+        x_range = x_max - x_min
+        y_range = y_max - y_min
+        ax.set_ylim(y_min , y_max + 0.1 * y_range)
+        # 存圖
+        plt.tight_layout() 
+        plt.savefig(temp_output_filename)
+        plt.close()
+        #--
+        print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，A注入B回收的電位分布圖的電流方向圖...繪製完成!')
     #--
     print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，模擬R2MS_Lite量測結果...')
     # 輸出CSV檔案
-    temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["OutputPNG_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.v299S.csv')
+    temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.v299S.csv')
     #print('儲存CSV檔案...')
     with open(temp_output_filename, 'w', encoding='utf-8') as f:
         #--
@@ -464,7 +512,42 @@ for i_ab_idx, ab in enumerate(ab_array):
     print(f'無窮遠處電位為0[V]時，第{i_ab_idx+1}組電極對，模擬R2MS_Lite量測結果...完成!') 
     #--    
 #--------------------------------------------
+# 用迴圈整理要合併的檔案名稱
+all_csv_files_list=[]
+for i_ab_idx, ab in enumerate(ab_array):
+    temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.v299S.csv')
+    all_csv_files_list.append(temp_output_filename)
+#--
+new_csv_header = None # 用於儲存最終要使用的單一檔頭
+new_csv_lines_without_header = [] # 儲存所有檔案的非檔頭內容
+# 用迴圈逐個載入並解析檔案
+for i_csv_index, csv_file_name in enumerate(all_csv_files_list):
+    with open(csv_file_name, 'r', encoding='utf-8') as InputCsvFile:
+        for line_index, line in enumerate(InputCsvFile):
+            if line_index==0:
+                # 檔頭
+                new_csv_header=line
+            else:
+                # 非檔頭內容
+                new_csv_lines_without_header.append(line)
+#--
+# 寫新的合併檔案
+temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB.v299S.csv')
+with open(temp_output_filename, 'w', encoding='utf-8') as OutputCsvFile:
+    # 寫入唯一的檔頭
+    OutputCsvFile.write(new_csv_header)        
+    # 寫入所有收集到的非檔頭內容
+    OutputCsvFile.writelines(new_csv_lines_without_header)
+#--------------------------------------------
 print('ERTMaker_SimulateForTimeSeries運作結束!')
+SCRIPT_END_TIME = time.perf_counter()
+TOTAL_DURATION = SCRIPT_END_TIME - SCRIPT_START_TIME
+# 格式化輸出，顯示小時、分鐘和秒
+hours = int(TOTAL_DURATION // 3600)
+minutes = int((TOTAL_DURATION % 3600) // 60)
+seconds = TOTAL_DURATION % 60
+print(f'運行花費時間: {hours} 小時 {minutes} 分鐘 {seconds:.4f} 秒')
+# --------------------------------------------
 print('--')
 #--------------------------------------------
 ```
