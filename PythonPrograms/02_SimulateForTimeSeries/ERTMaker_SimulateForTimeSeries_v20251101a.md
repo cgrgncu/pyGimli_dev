@@ -64,7 +64,7 @@ PAUSE
 "OutputFolderPath":"Output_ERTMaker_SimulateForTimeSeries/",
 "Output_MainFileName_Readme":"會產生很多檔案，這些檔案的主要檔名。",
 "Output_MainFileName":"XP1_SyntheticModel",
-"Output_PNG_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時",
+"Output_PNG_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖依照電腦性能將增加數秒鐘運行時間。",
 "Output_PNG_Enable":"Yes",
 "ElectrodeIndexAB_TxVoltageMax_Readme":"AB電極的發射器最大電壓，單位[V]",
 "ElectrodeIndexAB_TxVoltageMax":400,
