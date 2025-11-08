@@ -475,7 +475,6 @@ if __name__ == '__main__':
     print('觀測資料(ohm檔案)資訊:')
     print(data)
     #--------------------------------------------
-    #--------------------------------------------
     # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
     # 目前是基礎網格 BasicMeshSetTopoRes
     temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}.png')
