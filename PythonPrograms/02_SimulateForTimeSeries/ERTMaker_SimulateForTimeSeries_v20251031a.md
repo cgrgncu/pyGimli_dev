@@ -188,6 +188,7 @@ ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'],
     figsize=(temp_PNG_Width / temp_PNG_DPI, temp_PNG_Height / temp_PNG_DPI), 
     dpi=temp_PNG_DPI)
 ax.plot(electrodes_position_x_values, electrodes_position_z_values, 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
+ax.plot(electrodes_position_x_values[-1], electrodes_position_z_values[-1], 'o', markersize=6, color='lightseagreen', markerfacecolor='lightseagreen', markeredgecolor='black', label='Reference Nodes')
 ax.set_title(f'{temp_PNG_Title}' ,pad=15)  
 ax.set_xlabel('Distance (m)')
 ax.set_ylabel('Elevation (m)')
@@ -252,6 +253,9 @@ for event_index, channel_value_array in enumerate(new_CurrentMode_array):
 # 轉換成np陣列
 ab_array=np.array(ElectrodeIndexAB_List)
 print(ab_array)
+if ab_array.max() > data.sensorCount() :
+    print('錯誤!需要使用的放電電極AB數量不夠。請檢查ohm檔案。')
+    exit()
 #--------------------------------------------
 # 運行順推，只計算各感應器位置的電位分布
 print('運行順推...')
