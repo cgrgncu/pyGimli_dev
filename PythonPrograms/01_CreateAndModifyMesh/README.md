@@ -838,7 +838,6 @@ temp_PNG_DPI=temp_json_data["OutputFile06_BasicMeshPNG_DPI"]
 temp_PNG_Width=temp_json_data["OutputFile06_BasicMeshPNG_Width"]
 temp_PNG_Height=temp_json_data["OutputFile06_BasicMeshPNG_Height"]
 temp_PNG_Title=temp_json_data["OutputFile06_BasicMeshPNG_Title"]
-temp_PNG_Title=temp_json_data["OutputFile06_BasicMeshPNG_Title"]
 temp_PNG_ColorBarResistivityMin=temp_json_data["OutputFile06_BasicMeshPNG_ColorBarResistivityMin"]
 temp_PNG_ColorBarResistivityMax=temp_json_data["OutputFile06_BasicMeshPNG_ColorBarResistivityMax"]
 print('儲存PNG檔案...')
