@@ -297,7 +297,7 @@ for i_ab_idx, ab in enumerate(ab_array):
         #--------------------------------------------
         # 展示並儲存(不希望使用互動式視窗，將立即關閉plt) 
         # 目前是 CurrentFlowLines AB
-        temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["OutputPNG_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.png')
+        temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.png')
         ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'], 
             markers=False,
             showMesh=True,
@@ -538,6 +538,33 @@ with open(temp_output_filename, 'w', encoding='utf-8') as OutputCsvFile:
     OutputCsvFile.write(new_csv_header)        
     # 寫入所有收集到的非檔頭內容
     OutputCsvFile.writelines(new_csv_lines_without_header)
+#--------------------------------------------
+# 用迴圈整理要合併的檔案名稱
+if temp_json_data['Output_PNG_Enable'] == 'Yes' :
+    all_png_files_list=[]
+    for i_ab_idx, ab in enumerate(ab_array):
+        temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB_{(i_ab_idx+1):04d}.png')
+        all_png_files_list.append(temp_output_filename)
+    #--
+    # 1. 打開第一張圖片，作為 GIF 的「起始幀」
+    first_frame = Image.open(all_png_files_list[0])
+    # 2. 準備其餘的幀
+    frames = []
+    for filename in all_png_files_list[1:]:
+        img = Image.open(filename)
+        frames.append(img)
+    # 3. 呼叫 save 函式來建立 GIF
+    temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_CurrentFlowLinesAB.gif')
+    print(f"正在合併 {len(all_png_files_list)} 個幀到 {temp_output_filename}...")
+    first_frame.save(
+        temp_output_filename,
+        format='GIF',
+        append_images=frames,   # 附加所有後續幀
+        save_all=True,          # 必須為 True 才能儲存所有幀
+        duration=1000,          # 設定每幀的持續時間(ms)
+        loop=0                  # 設定循環次數， 0=無限循環
+    )
+    print(f"GIF 創建成功: {temp_output_filename}")    
 #--------------------------------------------
 print('ERTMaker_SimulateForTimeSeries運作結束!')
 SCRIPT_END_TIME = time.perf_counter()
