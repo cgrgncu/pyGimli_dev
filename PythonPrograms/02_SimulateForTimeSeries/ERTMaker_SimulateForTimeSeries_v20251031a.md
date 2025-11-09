@@ -5,6 +5,7 @@
 ### 版本
 + RUN_ERTMaker_SimulateForTimeSeries_v20251031a.py
   + 單執行緒，重複使用繪圖似乎記憶體控管很差。建議關閉繪圖。但只會關閉電流圖。
+  + 不論使用幾個電極，ref被規定是最後一個電極。
 
 ### 開發環境
 + Windows 10
