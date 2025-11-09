@@ -6,6 +6,7 @@
 + ERTMaker_SimulateForTimeSeries_v20251101a.py
   + 多執行緒(multiprocessing)，使用多核心分開繪圖，可避免記憶體無法正常釋放。
   + 但此版本使用多核心重複載入檔案，將影響工作效率，建議只有需要繪圖才使用此版本。
+  + 不論使用幾個電極，ref被規定是最後一個電極。
 
 ### 開發環境
 + Windows 10
