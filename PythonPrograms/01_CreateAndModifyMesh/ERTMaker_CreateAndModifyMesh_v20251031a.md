@@ -851,10 +851,10 @@ ax, _ = pg.show(mesh, data=mesh['Resistivity_(log10)'],
     figsize=(temp_PNG_Width / temp_PNG_DPI, temp_PNG_Height / temp_PNG_DPI), 
     dpi=temp_PNG_DPI)
 ax.plot(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], NumPy_StudyAreaMesh_z_coords_interp[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)], 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
-ax.set_title(f'{temp_PNG_Title}' ,pad=15)  
+ax.set_title(f'{temp_PNG_Title}\n Electrode_Count={len(NumPy_StudyAreaMesh_x_coords_original[(NumPy_StudyAreaMesh_ElectrodeIndex_original > 0)])}, Mesh_Node_Count={mesh.nodeCount()}, Mesh_Cell_Count={mesh.cellCount()} ' ,pad=15)  
 ax.set_xlabel('Distance (m)')
 ax.set_ylabel('Elevation (m)')
-ax.legend()
+ax.legend(loc='upper right',ncol=2,framealpha=0.4)
 ax.figure.text(0.98, 0.01, ERTMaker_Info, 
           ha='right', va='bottom', fontsize=8, color='gray')
 
