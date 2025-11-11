@@ -267,11 +267,11 @@ electric_potential = ert.simulate(mesh, scheme=data, res=mesh['Resistivity'], ca
 print('運行順推...完成!')
 #--
 # 轉換成np陣列
-#electric_potential = np.array(electric_potential)
+electric_potential = np.array(electric_potential)
 #--
 # 使用 np.save 儲存數據
-#output_npy_filename = 'electric_potential_RMatrix_data.npy'
-#np.save(output_npy_filename, electric_potential)
+temp_output_filename = os.path.join(temp_json_data['OutputFolderPath'],f'{temp_json_data["Output_MainFileName"]}_electric_potential.npy')
+np.save(temp_output_filename, electric_potential)
 #--------------------------------------------
 print(f'感應器位置數量: {data.sensorCount()}')
 sensor_positions = data.sensorPositions()
