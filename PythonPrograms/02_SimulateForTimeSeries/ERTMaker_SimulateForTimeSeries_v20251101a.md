@@ -237,7 +237,7 @@ def SavePNGCSVForTargetAB(i_ab_idx, ab, ab_array, ERTMaker_Info, Output_PNG_Enab
         #--
         ax.set_xlabel('Distance (m)')
         ax.set_ylabel('Elevation (m)')
-        ax.legend(loc='upper right')
+        ax.legend(loc='upper right',ncol=2,framealpha=0.4)
         ax.figure.text(0.98, 0.01, ERTMaker_Info, ha='right', va='bottom', fontsize=8, color='gray')
         #--
         # 調整邊界
@@ -466,6 +466,10 @@ if __name__ == '__main__':
         indexValue, x1Value, y1Value, x2Value, y2Value, markerValue = entry
         b = mesh.boundaries()[int(indexValue)]
         b.setMarker(int(markerValue))
+    #--
+    print(f"網格節點數量 (Mesh Node Count): {mesh.nodeCount()}")
+    print(f"網格單元數量 (Mesh Cell Count): {mesh.cellCount()}")
+    print(f"網格邊界數量 (Mesh Boundary Count): {mesh.boundaryCount()}")
     #--------------------------------------------
     # 讀取Ohm檔案
     print("載入OHM檔案...")
@@ -501,10 +505,10 @@ if __name__ == '__main__':
         dpi=temp_PNG_DPI)
     ax.plot(electrodes_position_x_values, electrodes_position_z_values, 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
     ax.plot(electrodes_position_x_values[-1], electrodes_position_z_values[-1], 'o', markersize=6, color='lightseagreen', markerfacecolor='lightseagreen', markeredgecolor='black', label='Reference Nodes')
-    ax.set_title(f'{temp_PNG_Title}' ,pad=15)  
+    ax.set_title(f'{temp_PNG_Title}\n Electrode_Count={len(electrodes_position_x_values)}, Mesh_Node_Count={mesh.nodeCount()}, Mesh_Cell_Count={mesh.cellCount()} ' ,pad=15)   
     ax.set_xlabel('Distance (m)')
     ax.set_ylabel('Elevation (m)')
-    ax.legend()
+    ax.legend(loc='upper right',ncol=2,framealpha=0.4)
     ax.figure.text(0.98, 0.01, ERTMaker_Info, 
               ha='right', va='bottom', fontsize=8, color='gray')
 
