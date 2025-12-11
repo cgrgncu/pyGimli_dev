@@ -39,7 +39,7 @@ PAUSE
 "InputFile02_Ohm_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "InputFile02_Ohm_FileName":"Input_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel.ohm",
 "InputFile03_v299Scsv_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
-"InputFile03_v299Scsv_FileName":"Input_ERTMaker_v299ScsvToUrf/E1-4_E1-5_SyntheticModel_CurrentFlowLinesAB.v299S.csv",
+"InputFile03_v299Scsv_FileName":"Input_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB_0001.v299S.csv",
 "InputFile04_Keep_ABMN_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "InputFile04_Keep_ABMN_FileName":"Input_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel.abmn",
 "OutputFile01_Urf_All_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
@@ -51,7 +51,7 @@ PAUSE
 "OutputFile04_PNG_All_MainFileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile04_PNG_All_MainFileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S",
 "OutputFile04_PNG_All_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時?",
-"OutputFile04_PNG_All_Enable":"No",
+"OutputFile04_PNG_All_Enable":"Yes",
 "OutputFile05_Urf_WS_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile05_Urf_WS_FileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.WS.urf",
 "OutputFile06_Urf_WS_SNR_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
@@ -61,7 +61,7 @@ PAUSE
 "OutputFile08_PNG_WS_MainFileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile08_PNG_WS_MainFileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.WS",
 "OutputFile08_PNG_WS_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時?",
-"OutputFile08_PNG_WS_Enable":"No",
+"OutputFile08_PNG_WS_Enable":"Yes",
 "OutputFile09_Urf_MGD_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile09_Urf_MGD_FileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.MGD.urf",
 "OutputFile10_Urf_MGD_SNR_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
@@ -71,7 +71,7 @@ PAUSE
 "OutputFile12_PNG_MGD_MainFileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile12_PNG_MGD_MainFileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.MGD",
 "OutputFile12_PNG_MGD_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時?",
-"OutputFile12_PNG_MGD_Enable":"No",
+"OutputFile12_PNG_MGD_Enable":"Yes",
 "OutputFile13_Urf_MPR_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile13_Urf_MPR_FileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.MPR.urf",
 "OutputFile14_Urf_MPR_SNR_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
@@ -81,7 +81,7 @@ PAUSE
 "OutputFile16_PNG_MPR_MainFileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile16_PNG_MPR_MainFileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.MPR",
 "OutputFile16_PNG_MPR_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時?",
-"OutputFile16_PNG_MPR_Enable":"No",
+"OutputFile16_PNG_MPR_Enable":"Yes",
 "OutputFile17_Urf_GD_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile17_Urf_GD_FileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.GD.urf",
 "OutputFile18_Urf_GD_SNR_FileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
@@ -91,13 +91,13 @@ PAUSE
 "OutputFile20_PNG_GD_MainFileName_Readme":"不論Winodws或Linux或MAC作業系統一律使用「/」描述檔案路徑與資料夾路徑。",
 "OutputFile20_PNG_GD_MainFileName":"Output_ERTMaker_v299ScsvToUrf/XP1_SyntheticModel_CurrentFlowLinesAB.v299S.GD",
 "OutputFile20_PNG_GD_Enable_Readme":"是否啟用輸出PNG。若要啟用請填入字串Yes，若不啟用請填入字串No。輸出PNG每張圖約耗時?",
-"OutputFile20_PNG_GD_Enable":"No",
+"OutputFile20_PNG_GD_Enable":"Yes",
 "Select_From_Readme":"請填入字串「All」、「WS」、「MGD」、「MPR」或「GD」。",
 "Select_From":"All",
 "Select_Keep_A_index_Readme":"請填入陣列。例如：「[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]」",
 "Select_Keep_A_index":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],
 "Select_Keep_B_index_Readme":"請填入陣列。例如：「[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]」",
-"Select_Keep_B_index":[23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43],
+"Select_Keep_B_index":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43],
 "Select_Keep_M_index_Readme":"請填入陣列。例如：「[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]」",
 "Select_Keep_M_index":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43],
 "Select_Keep_N_index_Readme":"請填入陣列。例如：「[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]」",
@@ -121,25 +121,29 @@ PAUSE
   + 內容為逗號分隔的數字，無檔頭。至少前四欄對應為A、B、M、N。
   + 例如:
     ```
-    1,23,2,3
-    1,23,2,4
-    1,23,2,5
-    1,23,2,6
-    1,23,2,7
-    1,23,2,8
-    1,23,2,9
-    1,23,2,10
+    1,4,2,3
+    1,4,2,5
+    1,4,2,6
+    1,4,2,7
+    1,4,2,8
+    1,4,2,9
+    1,4,2,10
+    1,4,2,11
+    1,4,2,12
+    1,4,2,13
     ```
     或
     ```
-    1,23,2,3,1.30413,0.400,0
-    1,23,2,4,1.71482,0.400,0
-    1,23,2,5,1.90068,0.400,0
-    1,23,2,6,1.99855,0.400,0
-    1,23,2,7,2.05486,0.400,0
-    1,23,2,8,2.08934,0.400,0
-    1,23,2,9,2.11152,0.400,0
-    1,23,2,10,2.12638,0.400,0
+    1,4,2,3,2.31935,0.400,155.88
+    1,4,2,5,7.27987,0.400,165.82
+    1,4,2,6,6.64785,0.400,165.03
+    1,4,2,7,2.39324,0.400,156.16
+    1,4,2,8,2.39419,0.400,156.16
+    1,4,2,9,1.85655,0.400,153.95
+    1,4,2,10,1.59998,0.400,152.66
+    1,4,2,11,1.41338,0.400,151.58
+    1,4,2,12,1.30444,0.400,150.89
+    1,4,2,13,1.23225,0.400,150.39
     ```
 + 程式碼:
 ```python
@@ -6375,12 +6379,14 @@ mask_Select_Keep_N_index = (np.isin(NumPyArray_N_index, NumPyArray_Select_Keep_N
 mask_Select_Keep_ABMN_index = mask_Select_Keep_A_index & mask_Select_Keep_B_index & mask_Select_Keep_M_index & mask_Select_Keep_N_index
 #--
 NumPyArray_urf_measurement_data_Select = NumPyArray_urf_measurement_data_Select[mask_Select_Keep_ABMN_index]
+print(f'初步篩選後數量 = {len(NumPyArray_urf_measurement_data_Select)}')
 #--
 # 依照單獨A、B、M、N進行初步篩選...完成!
 #--------------------------------------------
+
 #--------------------------------------------
 # 依照指定ABMN清單進行進一步篩選
-if temp_json_data["Select_Keep_ABMN_Enable"] == 'Yes':    
+if temp_json_data["Select_Keep_ABMN_Enable"] == 'Yes' and len(NumPyArray_urf_measurement_data_Select) > 0:    
     #--
     NumPyArray_ABMN_combo = NumPyArray_urf_measurement_data_Select[:, :4].astype(int).copy()
     Keep_ABMN_Matrix_int = Keep_ABMN_Matrix[:, :4].astype(int).copy()
@@ -6395,6 +6401,7 @@ if temp_json_data["Select_Keep_ABMN_Enable"] == 'Yes':
     ])
     # 應用遮罩進行篩選
     NumPyArray_urf_measurement_data_Select = NumPyArray_urf_measurement_data_Select[mask_Select_Keep_ABMN_combo]
+    print(f'進一步篩選後數量 = {len(NumPyArray_urf_measurement_data_Select)}')
     #--
 # 依照指定ABMN清單進行進一步篩選...完成!
 #--------------------------------------------
