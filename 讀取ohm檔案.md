@@ -70,7 +70,7 @@ for i in range(len(x_values)):
 # 但數值應可認為是一致的
 #--
 # 4. 取出觀測資料數量
-print(data.sensorCount())
+print(data.size())
 # 會印出222
 #--
 # 5. 印出有存在的資料欄位
