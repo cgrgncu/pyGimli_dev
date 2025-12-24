@@ -36,10 +36,18 @@ PNG_NumPy_Electrode_y = Ohm_data.sensors().array()[:, 1]
 PNG_NumPy_Electrode_z = Ohm_data.sensors().array()[:, 2]
 PNG_mesh = pg.Mesh(mesh)
 PNG_mesh_data = PNG_mesh['Resistivity_(log10)']
+PNG_colorbar_title = 'Resistivity (log10 Ωm)'
+PNG_colorbar_ticker_ModifyLog10ToLinear_Enable = True # True = 把colorbar數值文字從對數尺度調整成線性尺度 / False = 維持原本數值
+PNG_colorbar_ticker_ModifyLog10ToLinear_title = 'Resistivity (Ωm)'
 PNG_mesh_showMesh = True # True / False
+PNG_mesh_showBoundary = True # None / True / False ，某些時候None與True效果相同
+PNG_cMap = 'jet'
+PNG_cMin = None # None表示自動
+PNG_cMax = None # None表示自動
 PNG_DPI = 100
 PNG_Width = 1280
 PNG_Height = 720
+Output_PNG_FileName = 'ABCD.png'
 #--
 # 建立畫布
 fig, ax = plt.subplots(figsize=((PNG_Width / PNG_DPI, PNG_Height / PNG_DPI)))
@@ -49,16 +57,28 @@ ax, cbar = pg.show(PNG_mesh,
     ax=ax,
     markers=False,
     showMesh=PNG_mesh_showMesh,
-    label='Resistivity (log10 Ωm)',   # colorbar的標題。
-    axisLabels=False,                 # 阻止自動標籤，否則特定條件下會把Y軸轉換成深度..
-    cMap='jet')
+    showBoundary=PNG_mesh_showBoundary,  
+    label=PNG_colorbar_title,     # colorbar的標題。
+    axisLabels=False,             # 阻止自動標籤(否則特定條件下會把Y軸轉換成深度)。後面自行填入標籤。
+    cMap=PNG_cMap,
+    cMin=PNG_cMin,
+    cMax=PNG_cMax)
 # 繪製電極
 ax.plot(PNG_NumPy_Electrode_x, PNG_NumPy_Electrode_z, 'o', markersize=6, color='magenta', markerfacecolor='magenta', markeredgecolor='black', label='Electrode Nodes')
 ax.set_title(f'{PNG_Profile_Name}\n Electrode_Count= {len(PNG_NumPy_Electrode_x)}, Mesh_Node_Count={PNG_mesh.nodeCount()}, Mesh_Cell_Count={PNG_mesh.cellCount()} ' ,pad=15)  
-# 調整繪圖參數
+# 調整XY標籤
 ax.set_xlabel('Distance (m)')
 ax.set_ylabel('Elevation (m)')
+# 調整圖例
 ax.legend(loc='upper right',ncol=2,framealpha=0.4)
+# 調整colorbar內文字
+if PNG_colorbar_ticker_ModifyLog10ToLinear_Enable:
+    cbar.ax.xaxis.set_major_formatter(plt.matplotlib.ticker.FuncFormatter(lambda x, pos: f'{10**x:.1f}'.rstrip('0').rstrip('.')))    
+    cbar.ax.xaxis.get_offset_text().set_visible(False) # 避免顯示 1eX
+    cbar.set_label(PNG_colorbar_ticker_ModifyLog10ToLinear_title) # 使用你設定的 Ωm 標題
+else:
+    cbar.ax.xaxis.set_major_formatter(plt.matplotlib.ticker.ScalarFormatter(useMathText=False))
+    cbar.ax.xaxis.get_offset_text().set_visible(False)  # 避免顯示 1eX
 #--
 # 填入版本資訊
 fig.text(0.98, 0.01, ERTMaker_Info, ha='right', va='bottom', fontsize=8, color='gray')
@@ -69,11 +89,11 @@ x_range = x_max - x_min
 y_range = y_max - y_min
 ax.set_ylim(y_min , y_max + 0.1 * y_range)
 # 不用科學記號的 colorbar 數值
-cbar.ax.xaxis.set_major_formatter(ScalarFormatter(useMathText=False))
-cbar.ax.xaxis.get_offset_text().set_visible(False)  # 避免顯示 1eX
+#cbar.ax.xaxis.set_major_formatter(ScalarFormatter(useMathText=False))
+#cbar.ax.xaxis.get_offset_text().set_visible(False)  # 避免顯示 1eX
 #--
 print(f'儲存 {PNG_Profile_Name} 圖片...')
-Output_PNG_FileName = 'ABC.png'
+#Output_PNG_FileName = 'ABCD.png'
 if os.path.dirname(Output_PNG_FileName): # 防止空路徑報錯
     os.makedirs(os.path.dirname(Output_PNG_FileName), exist_ok=True)
 plt.tight_layout() 
