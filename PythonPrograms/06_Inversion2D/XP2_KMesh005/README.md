@@ -1,5 +1,11 @@
 ### XP2_KMesh005(三角預設網格)
 + 模型名稱: `XP2_KMesh005`
++ "Mesh_Setting02_AutoMesh_quality":32,
++ "Mesh_Setting03_AutoMesh_paraDepth":-1,
++ "Mesh_Setting04_AutoMesh_boundary":-1,
++ "Mesh_Setting05_AutoMesh_paraMaxCellSize":0,
++ "Mesh_Setting06_AutoMesh_addNodes":1,
++ "Mesh_Setting07_AutoMesh_paraDX":1,
 + 特色:
   + L=64[m]，電極間距=1[m]，電極數量65:
     + StudyArea_W=65[m]，StudyArea_H=26[m]，面積=1690[m^2]
