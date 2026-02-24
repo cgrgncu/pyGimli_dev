@@ -1,4 +1,4 @@
-### XP2_KMesh006(三角單位面積網格)
+### XP2_KMesh006(基本單位面積三角網格)
 + 模型名稱: `XP2_KMesh006`
 + "Mesh_Setting02_AutoMesh_quality":32,
 + "Mesh_Setting03_AutoMesh_paraDepth":-1,
