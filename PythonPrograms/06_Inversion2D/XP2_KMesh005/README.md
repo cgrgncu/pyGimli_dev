@@ -1,4 +1,4 @@
-### XP2_KMesh005(三角預設網格)
+### XP2_KMesh005(預設三角網格)
 + 模型名稱: `XP2_KMesh005`
 + "Mesh_Setting02_AutoMesh_quality":32,
 + "Mesh_Setting03_AutoMesh_paraDepth":-1,
@@ -16,6 +16,9 @@
     + 全網格數量: 1212[count]。計算時最高占用記憶體約?1[GB]
     + 最大內網格單元面積=0[m^2]。
   + Array: WS (1410筆資料)
-    + 均質電阻率 = 100 [Ohm-m]
+    + 均質真實電阻率 = 100 [Ohm-m]
+    + Response_Min = ? [Ohm-m]
+    + Response_Max = ? [Ohm-m]
     + K_ideal_Min = ? [Ohm-m]
     + K_ideal_Max = ? [Ohm-m]
+  + 最終花費時間: ?
