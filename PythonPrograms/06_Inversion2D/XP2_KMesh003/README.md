@@ -306,6 +306,6 @@
     + 均質真實電阻率 = 100 [Ohm-m]
     + Response_Min = 99.9999877527159 [Ohm-m]
     + Response_Max = 100.000013631885 [Ohm-m]
-    + K_ideal_Min = 5.62650225746495 [Ohm-m]
-    + K_ideal_Max = 4283.07529946192 [Ohm-m]
+    + K_mesh_Min = 5.62650225746495 [Ohm-m]
+    + K_mesh_Max = 4283.07529946192 [Ohm-m]
   + 最終花費時間: 00時 20分 52.918秒
