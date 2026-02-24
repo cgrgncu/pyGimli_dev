@@ -1,4 +1,4 @@
-### XP2_KMesh009(三角單位面積網格三次加細)
+### XP2_KMesh009(三次加細基本面積三角網格)
 + 模型名稱: `XP2_KMesh009`
 + "Mesh_Setting02_AutoMesh_quality":32,
 + "Mesh_Setting03_AutoMesh_paraDepth":-1,
@@ -13,9 +13,12 @@
     + 設計大於FullMesh_W=65*5+65+65*5=715[m]。實際: ?854[m]
     + 設計大於FullMesh_H=26+65*5=351[m]。實際: ?351[m]
   + 粗細資訊:
-    + 全網格數量: ?27132 [count]。計算時最高占用記憶體約38[GB]
-    + 最大內網格單元面積=0.25[m^2]。
+    + 全網格數量: 106060 [count]。計算時最高占用記憶體約38[GB]
+    + 最大內網格單元面積=0.03125 [m^2]。
   + Array: WS (1410筆資料)
-    + 均質電阻率 = 100 [Ohm-m]
-    + K_ideal_Min = ? [Ohm-m]
-    + K_ideal_Max = ? [Ohm-m]
+    + 均質真實電阻率 = 100 [Ohm-m]
+    + Response_Min = ? [Ohm-m]
+    + Response_Max = ? [Ohm-m]
+    + K_mesh_Min = ? [Ohm-m]
+    + K_mesh_Max = ? [Ohm-m]
+  + 最終花費時間: ?
