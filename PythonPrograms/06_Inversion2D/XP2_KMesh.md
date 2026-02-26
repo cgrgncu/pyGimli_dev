@@ -13,6 +13,17 @@
       + 特徵扭曲：由於順推模型已經嚴重偏離物理真實情況，預期的地質特徵（如地層界面、斷層位置）會被拉伸、壓縮或移位。
       + 錯誤決策：解釋人員若基於被扭曲的剖面進行分析，將導致嚴重的誤導。
 + 選數值計算(K_mesh)時，順推算出的是電阻率幾乎正確，與正確值差異小於+-0.01%。9種網格都是。
++ 地形效應(Topography Effect):
+  + Pygimli作者定義了地形效應(Topography Effect): 
+    + Topography Effect = k_FlatEarth/ k_Simulated
+    + k_FlatEarth: 理論上的平坦大地幾何因子
+    + k_Simulated: 數值模擬算出的真實幾何因子。
+  + 這種效應非常強烈，在作者的3D案例中表示，導致視電阻率產生 3 到 4 倍的增加或減少。
+  + 作者建議:
+    + 如果比值遠離 1，說明地形效應非常嚴重，必須在反演前進行修正，否則會在地底解釋出假的人造構造。
+  + REF:
+    + Günther, T., Rücker, C., & Spitzer, K. (2006). Three-dimensional modelling and inversion of DC resistivity data incorporating topography—II. Inversion. Geophysical Journal International, 166(2), 506-517.
+
 
 
 
