@@ -19,14 +19,19 @@
     + 均質真實電阻率 = 100 [Ohm-m]
     + Response_Min = 99.9999969036328 [Ohm-m]
     + Response_Max = 100.000013712488 [Ohm-m]
-    + K_mesh_Min = 6.28262992225489 [Ohm-m]
-    + K_mesh_Max = 3116.47449446109 [Ohm-m]
+    + K_mesh_Min = 6.28262992225489 [m]
+    + K_mesh_Max = 3116.47449446109 [m]
   + 最終花費時間: 00時 03分 20.876秒
 + 解析解K0:
   + Array: WS (1410筆資料)
     + 均質真實電阻率 = 100 [Ohm-m]
     + K0_Response_Min = 99.8215213260883 [Ohm-m]
     + K0_Response_Max = 100.008839992545 [Ohm-m]
-    + K0_mesh_Min = 6.28318530717959 [Ohm-m]
-    + K0_mesh_Max = 3116.45991236108 [Ohm-m]
+    + K0_mesh_Min = 6.28318530717959 [m]
+    + K0_mesh_Max = 3116.45991236108 [m]
   + 最終花費時間: 00時 02分 29.859秒
++ 偏差百分比:
+  + (Response_Min-K0_Response_Min)/K0_Response_Min = 0.17879468793255 [%]
+  + (Response_Max-K0_Response_Max)/K0_Response_Max = -0.00882549988347605 [%]
+  + (K_mesh_Min-K0_mesh_Min)/K0_mesh_Min = -0.00883922560846504 [%]
+  + (K_mesh_Max-K0_mesh_Max)/K0_mesh_Max = 0.000467905906707289 [%]
