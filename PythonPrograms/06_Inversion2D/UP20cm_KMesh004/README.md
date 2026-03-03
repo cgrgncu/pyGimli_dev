@@ -584,21 +584,21 @@
     + 內網格單元面積=0.015625[m^2]。
   + Array: WS (1410筆資料)
     + 均質真實電阻率 = 100 [Ohm-m]
-    + Response_Min = ? [Ohm-m]
-    + Response_Max = ? [Ohm-m]
-    + K_mesh_Min = ? [m]
-    + K_mesh_Max = ? [m]
-  + 最終花費時間: ?
+    + Response_Min = 99.9999900246581 [Ohm-m]
+    + Response_Max = 100.000011705635 [Ohm-m]
+    + K_mesh_Min = 6.38340158708879 [m]
+    + K_mesh_Max = 2831.7349133659 [m]
+  + 最終花費時間: 02時 34分 05.064秒
 + 解析解K0:
   + Array: WS (1410筆資料)
     + 均質真實電阻率 = 100 [Ohm-m]
-    + K0_Response_Min = ? [Ohm-m]
-    + K0_Response_Max = ? [Ohm-m]
-    + K0_mesh_Min = ? [m]
-    + K0_mesh_Max = ? [m]
-  + 最終花費時間: ?
+    + K0_Response_Min = 97.416137482526 [Ohm-m]
+    + K0_Response_Max = 112.234309761359 [Ohm-m]
+    + K0_mesh_Min = 6.40761689776564 [m]
+    + K0_mesh_Max = 3178.17798129175 [m]
+  + 最終花費時間: 00時 54分 20.775秒
 + 偏差百分比:
-  + (Response_Min-K0_Response_Min)/K0_Response_Min = 
-  + (Response_Max-K0_Response_Max)/K0_Response_Max = 
-  + (K_mesh_Min-K0_mesh_Min)/K0_mesh_Min = 
-  + (K_mesh_Max-K0_mesh_Max)/K0_mesh_Max = 
+  + (Response_Min-K0_Response_Min)/K0_Response_Min = 2.65238656438784 [%]
+  + (Response_Max-K0_Response_Max)/K0_Response_Max = -10.9006756327343 [%]
+  + (K_mesh_Min-K0_mesh_Min)/K0_mesh_Min = -0.37791445810834 [%]
+  + (K_mesh_Max-K0_mesh_Max)/K0_mesh_Max = -10.9006817731787 [%]
