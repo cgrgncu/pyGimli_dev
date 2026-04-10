@@ -13,19 +13,19 @@
 ```
 \Lite_PyGimli_Env\PythonEnv\
 \Lite_PyGimli_Env\ERTMaker_Inversion2D_v20260401a\Input_ERTMaker_StgToUrf\Inversion2D.json
-\Lite_PyGimli_Env\ERTMaker_Inversion2D_v20260401a\ERTMaker_Inversion2D_v20260125a.py
-\Lite_PyGimli_Env\ERTMaker_Inversion2D_v20260401a\RUN_ERTMaker_Inversion2D_v20260125a.bat
+\Lite_PyGimli_Env\ERTMaker_Inversion2D_v20260401a\ERTMaker_Inversion2D_v20260401a.py
+\Lite_PyGimli_Env\ERTMaker_Inversion2D_v20260401a\RUN_ERTMaker_Inversion2D_v20260401a.bat
 ```
 + 也可以放一些必要的輸入範例檔案(並非每個都有用到):
 ```
 
 ```
-+ 呼叫方式: 運行「RUN_ERTMaker_Inversion2D_v20260125a.bat」檔案，檔案內容:
++ 呼叫方式: 運行「RUN_ERTMaker_Inversion2D_v20260401a.bat」檔案，檔案內容:
 ```batch
-..\PythonEnv\Python.exe RUN_ERTMaker_Inversion2D_v20260125a.py
+..\PythonEnv\Python.exe RUN_ERTMaker_Inversion2D_v20260401a.py
 PAUSE
 ```
-### 主程式(ERTMaker_Inversion2D_v20260125a.py)
+### 主程式(ERTMaker_Inversion2D_v20260401a.py)
 + 設定檔(Inversion2D.json):
 ```json
 {
