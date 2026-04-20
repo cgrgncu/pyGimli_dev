@@ -1,4 +1,4 @@
-# Inversion2D(ERTMaker_Inversion2D_v20260401a.py)
+# Inversion2D(ERTMaker_Inversion2D_v20260419a.py)
 + 作者: HsiupoYeh
 + 更新日期: 2026-04-19
 
@@ -4848,9 +4848,10 @@ else:
     #ax.yaxis.set_major_formatter(plt.matplotlib.ticker.ScalarFormatter(useMathText=False))
     #ax.yaxis.get_major_formatter().set_scientific(False)
     ax.yaxis.set_major_formatter(plt.matplotlib.ticker.ScalarFormatter())
-    ax.yaxis.set_minor_formatter(plt.matplotlib.ticker.ScalarFormatter())
+    #ax.yaxis.set_minor_formatter(plt.matplotlib.ticker.ScalarFormatter())
+    ax.yaxis.set_minor_formatter(plt.matplotlib.ticker.FormatStrFormatter('%g'))    
     ax.yaxis.get_major_formatter().set_scientific(False)
-    ax.yaxis.get_minor_formatter().set_scientific(False)
+    #ax.yaxis.get_minor_formatter().set_scientific(False)
     #ax.yaxis.set_major_formatter(plt.matplotlib.ticker.FuncFormatter(lambda y, _: f'{y:g}'))
     #ax.yaxis.get_minor_formatter(plt.matplotlib.ticker.FuncFormatter(lambda y, _: f'{y:g}'))
     ax.grid(True, which='both', linestyle=':', alpha=0.4)
